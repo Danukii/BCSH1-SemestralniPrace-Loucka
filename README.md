@@ -15,4 +15,4 @@ Jednoduchá databázová aplikace - TODO list (správa úkolů):
 
 • aplikace umožňuje označit úkol jako splněný
 
-• data jsou ukládána do souboru
+• data jsou ukládána do souboru (např. JSON)
