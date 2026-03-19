@@ -1,5 +1,5 @@
 # BCSH1-SemestralniPrace-Loucka
-Jednoduchá databázová aplikace - TODO list (správa úkolů)
+Jednoduchá databázová aplikace - TODO list (správa úkolů):
 
 • sledované entity – úkoly, uživatelé, štítky (labely)
 
