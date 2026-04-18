@@ -56,7 +56,8 @@
             dgvUkoly.MultiSelect = false;
             dgvUkoly.Name = "dgvUkoly";
             dgvUkoly.ReadOnly = true;
-            dgvUkoly.Size = new Size(372, 426);
+            dgvUkoly.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvUkoly.Size = new Size(373, 426);
             dgvUkoly.TabIndex = 0;
             // 
             // Nazev
@@ -92,7 +93,7 @@
             Pridat.TabIndex = 1;
             Pridat.Text = "přidat";
             Pridat.UseVisualStyleBackColor = true;
-            Pridat.Click += Pridat_Click;
+            Pridat.Click += btnPridat_Click;
             // 
             // Smazat
             // 
@@ -103,7 +104,7 @@
             Smazat.TabIndex = 2;
             Smazat.Text = "smazat";
             Smazat.UseVisualStyleBackColor = true;
-            Smazat.Click += Smazat_Click;
+            Smazat.Click += btnSmazat_Click;
             // 
             // Upravit
             // 
@@ -114,7 +115,7 @@
             Upravit.TabIndex = 3;
             Upravit.Text = "upravit";
             Upravit.UseVisualStyleBackColor = true;
-            Upravit.Click += Upravit_Click;
+            Upravit.Click += btnUpravit_Click;
             // 
             // labelNazev
             // 

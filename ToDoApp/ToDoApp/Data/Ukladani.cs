@@ -20,7 +20,10 @@ namespace ToDoApp.Data
 
         public void Ulozit()
         {
-            var data = JsonSerializer.Serialize(this);
+            var data = JsonSerializer.Serialize(this, new JsonSerializerOptions
+            {
+                WriteIndented = true
+            });
             File.WriteAllText(FilePath, data);
         }
 
@@ -30,7 +33,16 @@ namespace ToDoApp.Data
                 return new Ukladani();
 
             var json = File.ReadAllText(FilePath);
-            return JsonSerializer.Deserialize<Ukladani>(json);
+            var data = JsonSerializer.Deserialize<Ukladani>(json);
+
+            if (data == null)
+                return new Ukladani();
+
+            data.Ukoly ??= new List<Ukol>();
+            data.Uzivatele ??= new List<Uzivatel>();
+            data.Labely ??= new List<Entity.Label>();
+
+            return data;
         }
 
     }

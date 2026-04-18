@@ -26,7 +26,12 @@ namespace ToDoApp
 
             dgvUkoly.AutoGenerateColumns = false;
 
+
             _data = Ukladani.Nacist();
+
+            if (_data.Ukoly == null)
+                _data.Ukoly = new List<Ukol>();
+
             _vytvoreniUkolu = new VytvoreniUkolu(_data);
 
             _bindingUkoly = new BindingList<Ukol>(_data.Ukoly);
@@ -59,12 +64,14 @@ namespace ToDoApp
             {
                 Nazev = nazevUkolu.Text,
                 Popis = popis.Text,
-                JeSplneno = dtpDatumSplneni.Checked
+                JeSplneno = chbSplneno.Checked,
+                DatumSplneni = dtpDatumSplneni.Value
+
             };
 
             _vytvoreniUkolu.PridatUkol(ukol);
 
-            _bindingUkoly.Add(ukol);
+            _bindingUkoly.ResetBindings();
         }
 
         //Smazání úkolu
@@ -97,21 +104,6 @@ namespace ToDoApp
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void Pridat_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Upravit_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Smazat_Click(object sender, EventArgs e)
         {
 
         }
