@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ToDoApp.Entity
 {
-    internal class Ukol
+    public class Ukol
     {
         public int Id { get; set; }
         public string Nazev { get; set; }

@@ -29,14 +29,11 @@
         private void InitializeComponent()
         {
             dgvUkoly = new DataGridView();
-            Nazev = new DataGridViewTextBoxColumn();
-            DatumSplneni = new DataGridViewTextBoxColumn();
-            JeSplneno = new DataGridViewCheckBoxColumn();
             Pridat = new Button();
             Smazat = new Button();
             Upravit = new Button();
             labelNazev = new Label();
-            popis = new Label();
+            labelPopis = new Label();
             labelDatumSplneni = new Label();
             nazevUkolu = new TextBox();
             txtPopisu = new TextBox();
@@ -44,6 +41,13 @@
             chbSplneno = new CheckBox();
             cmbUzivatel = new ComboBox();
             chlbLabely = new CheckedListBox();
+            labelLabel = new Label();
+            PridatLabel = new Button();
+            labelNazevLabelu = new Label();
+            txtLabel = new TextBox();
+            labelUzivatel = new Label();
+            jmenoUzivatele = new TextBox();
+            pridatUzivatele = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvUkoly).BeginInit();
             SuspendLayout();
             // 
@@ -51,43 +55,18 @@
             // 
             dgvUkoly.BackgroundColor = SystemColors.Control;
             dgvUkoly.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvUkoly.Columns.AddRange(new DataGridViewColumn[] { Nazev, DatumSplneni, JeSplneno });
             dgvUkoly.Location = new Point(12, 12);
             dgvUkoly.MultiSelect = false;
             dgvUkoly.Name = "dgvUkoly";
             dgvUkoly.ReadOnly = true;
             dgvUkoly.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvUkoly.Size = new Size(373, 426);
+            dgvUkoly.Size = new Size(450, 426);
             dgvUkoly.TabIndex = 0;
-            // 
-            // Nazev
-            // 
-            Nazev.DataPropertyName = "Nazev";
-            Nazev.HeaderText = "název";
-            Nazev.Name = "Nazev";
-            Nazev.ReadOnly = true;
-            Nazev.Width = 150;
-            // 
-            // DatumSplneni
-            // 
-            DatumSplneni.DataPropertyName = "DatumSplneni";
-            DatumSplneni.HeaderText = "datum splnění";
-            DatumSplneni.Name = "DatumSplneni";
-            DatumSplneni.ReadOnly = true;
-            DatumSplneni.Width = 120;
-            // 
-            // JeSplneno
-            // 
-            JeSplneno.DataPropertyName = "JeSplneno";
-            JeSplneno.HeaderText = "splněno";
-            JeSplneno.Name = "JeSplneno";
-            JeSplneno.ReadOnly = true;
-            JeSplneno.Width = 60;
             // 
             // Pridat
             // 
             Pridat.DialogResult = DialogResult.OK;
-            Pridat.Location = new Point(446, 285);
+            Pridat.Location = new Point(483, 415);
             Pridat.Name = "Pridat";
             Pridat.Size = new Size(75, 23);
             Pridat.TabIndex = 1;
@@ -98,7 +77,7 @@
             // Smazat
             // 
             Smazat.DialogResult = DialogResult.OK;
-            Smazat.Location = new Point(446, 373);
+            Smazat.Location = new Point(698, 415);
             Smazat.Name = "Smazat";
             Smazat.Size = new Size(75, 23);
             Smazat.TabIndex = 2;
@@ -109,7 +88,7 @@
             // Upravit
             // 
             Upravit.DialogResult = DialogResult.OK;
-            Upravit.Location = new Point(446, 329);
+            Upravit.Location = new Point(593, 415);
             Upravit.Name = "Upravit";
             Upravit.Size = new Size(75, 23);
             Upravit.TabIndex = 3;
@@ -120,27 +99,27 @@
             // labelNazev
             // 
             labelNazev.AutoSize = true;
-            labelNazev.Location = new Point(446, 42);
+            labelNazev.Location = new Point(485, 25);
             labelNazev.Name = "labelNazev";
             labelNazev.Size = new Size(73, 15);
             labelNazev.TabIndex = 4;
             labelNazev.Text = "název úkolu:";
             labelNazev.TextAlign = ContentAlignment.TopCenter;
             // 
-            // popis
+            // labelPopis
             // 
-            popis.AutoSize = true;
-            popis.Location = new Point(446, 82);
-            popis.Name = "popis";
-            popis.Size = new Size(72, 15);
-            popis.TabIndex = 5;
-            popis.Text = "popis úkolu:";
+            labelPopis.AutoSize = true;
+            labelPopis.Location = new Point(486, 54);
+            labelPopis.Name = "labelPopis";
+            labelPopis.Size = new Size(72, 15);
+            labelPopis.TabIndex = 5;
+            labelPopis.Text = "popis úkolu:";
             // 
             // labelDatumSplneni
             // 
             labelDatumSplneni.AccessibleRole = AccessibleRole.None;
             labelDatumSplneni.AutoSize = true;
-            labelDatumSplneni.Location = new Point(446, 130);
+            labelDatumSplneni.Location = new Point(486, 94);
             labelDatumSplneni.Name = "labelDatumSplneni";
             labelDatumSplneni.Size = new Size(86, 15);
             labelDatumSplneni.TabIndex = 6;
@@ -148,21 +127,21 @@
             // 
             // nazevUkolu
             // 
-            nazevUkolu.Location = new Point(584, 39);
+            nazevUkolu.Location = new Point(599, 22);
             nazevUkolu.Name = "nazevUkolu";
             nazevUkolu.Size = new Size(174, 23);
             nazevUkolu.TabIndex = 7;
             // 
             // txtPopisu
             // 
-            txtPopisu.Location = new Point(584, 79);
+            txtPopisu.Location = new Point(599, 51);
             txtPopisu.Name = "txtPopisu";
             txtPopisu.Size = new Size(174, 23);
             txtPopisu.TabIndex = 8;
             // 
             // dtpDatumSplneni
             // 
-            dtpDatumSplneni.Location = new Point(584, 124);
+            dtpDatumSplneni.Location = new Point(599, 88);
             dtpDatumSplneni.Name = "dtpDatumSplneni";
             dtpDatumSplneni.Size = new Size(174, 23);
             dtpDatumSplneni.TabIndex = 9;
@@ -170,7 +149,7 @@
             // chbSplneno
             // 
             chbSplneno.AutoSize = true;
-            chbSplneno.Location = new Point(451, 184);
+            chbSplneno.Location = new Point(614, 370);
             chbSplneno.Name = "chbSplneno";
             chbSplneno.Size = new Size(68, 19);
             chbSplneno.TabIndex = 10;
@@ -180,18 +159,78 @@
             // cmbUzivatel
             // 
             cmbUzivatel.FormattingEnabled = true;
-            cmbUzivatel.Location = new Point(617, 180);
+            cmbUzivatel.Location = new Point(599, 123);
             cmbUzivatel.Name = "cmbUzivatel";
-            cmbUzivatel.Size = new Size(141, 23);
+            cmbUzivatel.Size = new Size(174, 23);
             cmbUzivatel.TabIndex = 11;
             // 
             // chlbLabely
             // 
             chlbLabely.FormattingEnabled = true;
-            chlbLabely.Location = new Point(617, 240);
+            chlbLabely.Location = new Point(483, 241);
             chlbLabely.Name = "chlbLabely";
-            chlbLabely.Size = new Size(141, 184);
+            chlbLabely.Size = new Size(100, 148);
             chlbLabely.TabIndex = 12;
+            // 
+            // labelLabel
+            // 
+            labelLabel.AutoSize = true;
+            labelLabel.Location = new Point(483, 223);
+            labelLabel.Name = "labelLabel";
+            labelLabel.Size = new Size(35, 15);
+            labelLabel.TabIndex = 13;
+            labelLabel.Text = "štítky";
+            // 
+            // PridatLabel
+            // 
+            PridatLabel.Location = new Point(684, 288);
+            PridatLabel.Name = "PridatLabel";
+            PridatLabel.Size = new Size(89, 23);
+            PridatLabel.TabIndex = 14;
+            PridatLabel.Text = "přidat štítek";
+            PridatLabel.UseVisualStyleBackColor = true;
+            // 
+            // labelNazevLabelu
+            // 
+            labelNazevLabelu.AutoSize = true;
+            labelNazevLabelu.Location = new Point(599, 241);
+            labelNazevLabelu.Name = "labelNazevLabelu";
+            labelNazevLabelu.Size = new Size(69, 15);
+            labelNazevLabelu.TabIndex = 15;
+            labelNazevLabelu.Text = "název štítku";
+            // 
+            // txtLabel
+            // 
+            txtLabel.Location = new Point(599, 259);
+            txtLabel.Name = "txtLabel";
+            txtLabel.Size = new Size(174, 23);
+            txtLabel.TabIndex = 16;
+            // 
+            // labelUzivatel
+            // 
+            labelUzivatel.AutoSize = true;
+            labelUzivatel.Location = new Point(486, 131);
+            labelUzivatel.Name = "labelUzivatel";
+            labelUzivatel.Size = new Size(93, 15);
+            labelUzivatel.TabIndex = 17;
+            labelUzivatel.Text = "jméno uživatele:";
+            // 
+            // jmenoUzivatele
+            // 
+            jmenoUzivatele.Location = new Point(599, 152);
+            jmenoUzivatele.Name = "jmenoUzivatele";
+            jmenoUzivatele.Size = new Size(174, 23);
+            jmenoUzivatele.TabIndex = 18;
+            // 
+            // pridatUzivatele
+            // 
+            pridatUzivatele.Location = new Point(672, 181);
+            pridatUzivatele.Name = "pridatUzivatele";
+            pridatUzivatele.RightToLeft = RightToLeft.Yes;
+            pridatUzivatele.Size = new Size(101, 23);
+            pridatUzivatele.TabIndex = 19;
+            pridatUzivatele.Text = "přidat uživatele";
+            pridatUzivatele.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -199,6 +238,13 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(800, 450);
+            Controls.Add(pridatUzivatele);
+            Controls.Add(jmenoUzivatele);
+            Controls.Add(labelUzivatel);
+            Controls.Add(txtLabel);
+            Controls.Add(labelNazevLabelu);
+            Controls.Add(PridatLabel);
+            Controls.Add(labelLabel);
             Controls.Add(chlbLabely);
             Controls.Add(cmbUzivatel);
             Controls.Add(chbSplneno);
@@ -206,7 +252,7 @@
             Controls.Add(txtPopisu);
             Controls.Add(nazevUkolu);
             Controls.Add(labelDatumSplneni);
-            Controls.Add(popis);
+            Controls.Add(labelPopis);
             Controls.Add(labelNazev);
             Controls.Add(Upravit);
             Controls.Add(Smazat);
@@ -222,14 +268,11 @@
         #endregion
 
         private DataGridView dgvUkoly;
-        private DataGridViewTextBoxColumn Nazev;
-        private DataGridViewTextBoxColumn DatumSplneni;
-        private DataGridViewCheckBoxColumn JeSplneno;
         private Button Pridat;
         private Button Smazat;
         private Button Upravit;
         private Label labelNazev;
-        private Label popis;
+        private Label labelPopis;
         private Label labelDatumSplneni;
         private TextBox nazevUkolu;
         private TextBox txtPopisu;
@@ -237,5 +280,12 @@
         private CheckBox chbSplneno;
         private ComboBox cmbUzivatel;
         private CheckedListBox chlbLabely;
+        private Label labelLabel;
+        private Button PridatLabel;
+        private Label labelNazevLabelu;
+        private TextBox txtLabel;
+        private Label labelUzivatel;
+        private TextBox jmenoUzivatele;
+        private Button pridatUzivatele;
     }
 }
