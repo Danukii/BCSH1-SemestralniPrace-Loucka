@@ -35,59 +35,66 @@
             dtpDatum = new DateTimePicker();
             chbSplneno = new CheckBox();
             cmbUzivatel = new ComboBox();
-            chlbLabely = new CheckedListBox();
+            chlbStitky = new CheckedListBox();
+            lblNazevUkolu = new Label();
+            label2 = new Label();
+            lblUzivatele = new Label();
+            lblDatumSplneni = new Label();
+            lblStitky = new Label();
             SuspendLayout();
             // 
             // txtNazev
             // 
             txtNazev.ForeColor = SystemColors.ScrollBar;
-            txtNazev.Location = new Point(12, 12);
+            txtNazev.Location = new Point(33, 41);
             txtNazev.Name = "txtNazev";
             txtNazev.Size = new Size(175, 23);
             txtNazev.TabIndex = 0;
-            txtNazev.Text = "zadejte název";
             txtNazev.TextAlign = HorizontalAlignment.Right;
             // 
             // txtPopis
             // 
             txtPopis.ForeColor = SystemColors.ScrollBar;
-            txtPopis.Location = new Point(12, 41);
+            txtPopis.Location = new Point(33, 96);
             txtPopis.Multiline = true;
             txtPopis.Name = "txtPopis";
             txtPopis.Size = new Size(175, 67);
             txtPopis.TabIndex = 1;
-            txtPopis.Text = "zadejte popis";
             txtPopis.TextAlign = HorizontalAlignment.Right;
             // 
             // btnOk
             // 
-            btnOk.Location = new Point(221, 185);
+            btnOk.ForeColor = SystemColors.ControlText;
+            btnOk.Location = new Point(318, 326);
             btnOk.Name = "btnOk";
             btnOk.Size = new Size(75, 23);
             btnOk.TabIndex = 2;
             btnOk.Text = "OK";
             btnOk.UseVisualStyleBackColor = true;
+            btnOk.Click += btnOK_Click;
             // 
             // btnZrusit
             // 
-            btnZrusit.Location = new Point(321, 185);
+            btnZrusit.ForeColor = SystemColors.ControlText;
+            btnZrusit.Location = new Point(418, 326);
             btnZrusit.Name = "btnZrusit";
             btnZrusit.Size = new Size(75, 23);
             btnZrusit.TabIndex = 3;
             btnZrusit.Text = "zrušit";
             btnZrusit.UseVisualStyleBackColor = true;
+            btnZrusit.Click += btnCancel_Click;
             // 
             // dtpDatum
             // 
-            dtpDatum.Location = new Point(221, 12);
+            dtpDatum.Location = new Point(315, 41);
             dtpDatum.Name = "dtpDatum";
-            dtpDatum.Size = new Size(175, 23);
+            dtpDatum.Size = new Size(178, 23);
             dtpDatum.TabIndex = 4;
             // 
             // chbSplneno
             // 
             chbSplneno.AutoSize = true;
-            chbSplneno.Location = new Point(221, 114);
+            chbSplneno.Location = new Point(318, 144);
             chbSplneno.Name = "chbSplneno";
             chbSplneno.Size = new Size(68, 19);
             chbSplneno.TabIndex = 5;
@@ -97,25 +104,86 @@
             // cmbUzivatel
             // 
             cmbUzivatel.FormattingEnabled = true;
-            cmbUzivatel.Location = new Point(221, 41);
+            cmbUzivatel.Location = new Point(315, 96);
             cmbUzivatel.Name = "cmbUzivatel";
-            cmbUzivatel.Size = new Size(175, 23);
+            cmbUzivatel.Size = new Size(178, 23);
             cmbUzivatel.TabIndex = 6;
             // 
-            // chlbLabely
+            // chlbStitky
             // 
-            chlbLabely.FormattingEnabled = true;
-            chlbLabely.Location = new Point(12, 114);
-            chlbLabely.Name = "chlbLabely";
-            chlbLabely.Size = new Size(175, 94);
-            chlbLabely.TabIndex = 7;
+            chlbStitky.FormattingEnabled = true;
+            chlbStitky.Location = new Point(33, 201);
+            chlbStitky.Name = "chlbStitky";
+            chlbStitky.Size = new Size(175, 148);
+            chlbStitky.TabIndex = 7;
+            // 
+            // lblNazevUkolu
+            // 
+            lblNazevUkolu.AutoSize = true;
+            lblNazevUkolu.BackColor = Color.Transparent;
+            lblNazevUkolu.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            lblNazevUkolu.Location = new Point(118, 21);
+            lblNazevUkolu.Name = "lblNazevUkolu";
+            lblNazevUkolu.Size = new Size(91, 17);
+            lblNazevUkolu.TabIndex = 8;
+            lblNazevUkolu.Text = "zadejte název";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
+            label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            label2.Location = new Point(118, 76);
+            label2.Name = "label2";
+            label2.Size = new Size(90, 17);
+            label2.TabIndex = 9;
+            label2.Text = "zadejte popis";
+            // 
+            // lblUzivatele
+            // 
+            lblUzivatele.AutoSize = true;
+            lblUzivatele.BackColor = Color.Transparent;
+            lblUzivatele.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            lblUzivatele.Location = new Point(315, 76);
+            lblUzivatele.Name = "lblUzivatele";
+            lblUzivatele.Size = new Size(178, 17);
+            lblUzivatele.TabIndex = 10;
+            lblUzivatele.Text = "vyberte / vytvořte uživatele";
+            // 
+            // lblDatumSplneni
+            // 
+            lblDatumSplneni.AutoSize = true;
+            lblDatumSplneni.BackColor = Color.Transparent;
+            lblDatumSplneni.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            lblDatumSplneni.Location = new Point(346, 21);
+            lblDatumSplneni.Name = "lblDatumSplneni";
+            lblDatumSplneni.Size = new Size(147, 17);
+            lblDatumSplneni.TabIndex = 11;
+            lblDatumSplneni.Text = "vyberte datum splnění";
+            // 
+            // lblStitky
+            // 
+            lblStitky.AutoSize = true;
+            lblStitky.BackColor = Color.Transparent;
+            lblStitky.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            lblStitky.Location = new Point(57, 181);
+            lblStitky.Name = "lblStitky";
+            lblStitky.Size = new Size(152, 17);
+            lblStitky.TabIndex = 12;
+            lblStitky.Text = "vyberte / vytvořte šítek";
             // 
             // FormUpravitUkol
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(408, 219);
-            Controls.Add(chlbLabely);
+            BackColor = Color.Purple;
+            ClientSize = new Size(526, 380);
+            Controls.Add(lblStitky);
+            Controls.Add(lblDatumSplneni);
+            Controls.Add(lblUzivatele);
+            Controls.Add(label2);
+            Controls.Add(lblNazevUkolu);
+            Controls.Add(chlbStitky);
             Controls.Add(cmbUzivatel);
             Controls.Add(chbSplneno);
             Controls.Add(dtpDatum);
@@ -123,9 +191,11 @@
             Controls.Add(btnOk);
             Controls.Add(txtPopis);
             Controls.Add(txtNazev);
+            ForeColor = SystemColors.ControlLightLight;
             Name = "FormUpravitUkol";
             Text = "Upravení úkolu";
             TopMost = true;
+            Load += FormUpravitUkol_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -139,6 +209,11 @@
         private DateTimePicker dtpDatum;
         private CheckBox chbSplneno;
         private ComboBox cmbUzivatel;
-        private CheckedListBox chlbLabely;
+        private CheckedListBox chlbStitky;
+        private Label lblNazevUkolu;
+        private Label label2;
+        private Label lblUzivatele;
+        private Label lblDatumSplneni;
+        private Label lblStitky;
     }
 }

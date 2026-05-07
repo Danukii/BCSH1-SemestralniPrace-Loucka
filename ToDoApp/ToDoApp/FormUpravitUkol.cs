@@ -12,38 +12,40 @@ namespace ToDoApp
     public partial class FormUpravitUkol : Form
     {
         private List<Uzivatel> _uzivatele;
-        private List<Entity.Label> _labely;
+        private List<Stitek> _stitky;
 
         public Ukol? Ukol { get; private set; }
 
         /*
-         * Tato třída představuje formulář pro úpravu úkolu. Umožňuje uživateli změnit název, popis, datum splnění, stav úkolu, uživatele a štítky.
+         * Tato třída představuje formulář pro založení/přidání úkolu. Umožňuje uživateli nastavit název, popis, datum splnění, stav úkolu, uživatele a štítky.
          * Formulář obsahuje textová pole pro název a popis, DateTimePicker pro datum splnění, CheckBox pro stav úkolu, ComboBox pro výběr uživatele a CheckedListBox pro výběr štítků.
          * Po potvrzení změn se aktualizované informace uloží do databáze nebo datové struktury, která uchovává úkoly.
-         * Formulář může být otevřen z hlavního formuláře (Form1) při výběru úkolu a kliknutí na tlačítko "Upravit".
          *
-         * otevře se při „Upravit“
+         * otevře se při „Přidat“ a „Upravit“ (s předaným úkolem)
          * předvyplní hodnoty
          * OK → uloží změny
          */
-        public FormUpravitUkol(List<Uzivatel> uzivatele, List<Entity.Label> labely, Ukol ukol = null)
+        public FormUpravitUkol(
+            List<Uzivatel> uzivatele,
+            List<Stitek> stitky,
+            Ukol ukol = null)
         {
             InitializeComponent();
 
             _uzivatele = uzivatele;
-            _labely = labely;
+            _stitky = stitky;
 
-            // ComboBox - uživatelé
+            // uživatelé
             cmbUzivatel.DataSource = _uzivatele;
-            cmbUzivatel.DisplayMember = "Nazev";
+            cmbUzivatel.DisplayMember = "Jmeno";
             cmbUzivatel.ValueMember = "Id";
 
-            // Labely
-            chlbLabely.Items.Clear();
-            foreach (var l in _labely)
-                chlbLabely.Items.Add(l);
+            // štítky
+            chlbStitky.Items.Clear();
+            foreach (var l in _stitky)
+                chlbStitky.Items.Add(l);
 
-            chlbLabely.DisplayMember = "Nazev";
+            chlbStitky.DisplayMember = "Nazev";
 
             // pokud upravujeme existující úkol
             if (ukol != null)
@@ -60,11 +62,11 @@ namespace ToDoApp
                 if (ukol.UzivatelId.HasValue)
                     cmbUzivatel.SelectedValue = ukol.UzivatelId.Value;
 
-                // označení labelů
-                for (int i = 0; i < chlbLabely.Items.Count; i++)
+                // označení štítků
+                for (int i = 0; i < chlbStitky.Items.Count; i++)
                 {
-                    var label = (Entity.Label)chlbLabely.Items[i];
-                    chlbLabely.SetItemChecked(i, ukol.LabelIds.Contains(label.Id));
+                    var label = (Stitek)chlbStitky.Items[i];
+                    chlbStitky.SetItemChecked(i, ukol.StitekId.Contains(label.Id));
                 }
             }
         }
@@ -73,7 +75,7 @@ namespace ToDoApp
         {
             if (string.IsNullOrWhiteSpace(txtNazev.Text))
             {
-                MessageBox.Show("Název nesmí být prázdný");
+                MessageBox.Show("Zadej název úkolu");
                 return;
             }
 
@@ -91,13 +93,13 @@ namespace ToDoApp
             else
                 Ukol.UzivatelId = null;
 
-            // labely
-            Ukol.LabelIds.Clear();
+            // štítky
+            Ukol.StitekId.Clear();
 
-            foreach (var item in chlbLabely.CheckedItems)
+            foreach (var item in chlbStitky.CheckedItems)
             {
-                var label = (Entity.Label)item;
-                Ukol.LabelIds.Add(label.Id);
+                var stitek = (Stitek)item;
+                Ukol.StitekId.Add(stitek.Id);
             }
 
             DialogResult = DialogResult.OK;
@@ -108,6 +110,11 @@ namespace ToDoApp
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void FormUpravitUkol_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

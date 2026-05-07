@@ -18,232 +18,266 @@ namespace ToDoApp
     {
         private Ukladani _data;
         private VytvoreniUkolu _vytvoreniUkolu;
-        private BindingList<Ukol> _bindingUkoly;
 
         public Form1()
         {
             InitializeComponent();
 
-            dgvUkoly.AutoGenerateColumns = false;
-            dgvUkoly.Columns.Clear();
-
-            dgvUkoly.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                HeaderText = "název",
-                DataPropertyName = "Nazev",
-                Name = "Nazev",
-                Width = 100
-            });
-            dgvUkoly.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                HeaderText = "popis",
-                DataPropertyName = "Popis",
-                Name = "Popis",
-                Width = 200
-            });
-            dgvUkoly.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                HeaderText = "datum splnění",
-                DataPropertyName = "DatumSplneni",
-                Name = "DatumSplneni",
-                Width = 80
-            });
-            dgvUkoly.Columns.Add(new DataGridViewCheckBoxColumn
-            {
-                HeaderText = "splněno",
-                DataPropertyName = "JeSplneno",
-                Name = "JeSplneno",
-                Width = 50
-            });
-
-
+            // načtení dat
             _data = Ukladani.Nacist();
 
-            if (_data.Ukoly == null)
-                _data.Ukoly = new List<Ukol>();
+            _data.Ukoly ??= new List<Ukol>();
+            _data.Uzivatele ??= new List<Uzivatel>();
+            _data.Stitky ??= new List<Stitek>();
 
-            _vytvoreniUkolu = new VytvoreniUkolu(_data);
-
-            // testovací data
+            // testovací data (jen když je prázdno)
             if (!_data.Uzivatele.Any())
             {
                 _data.Uzivatele.Add(new Uzivatel { Id = 1, Jmeno = "Já" });
             }
 
-            if (!_data.Labely.Any())
+            if (!_data.Stitky.Any())
             {
-                _data.Labely.Add(new Entity.Label { Id = 1, Nazev = "Škola" });
-                _data.Labely.Add(new Entity.Label { Id = 2, Nazev = "Práce" });
+                _data.Stitky.Add(new Stitek { Id = 1, Nazev = "Škola" });
+                _data.Stitky.Add(new Stitek { Id = 2, Nazev = "Práce" });
             }
 
-            // naplnění ComboBoxu (uživatelé)
-            cmbUzivatel.DataSource = _data.Uzivatele;
-            cmbUzivatel.DisplayMember = "Jmeno";
-            cmbUzivatel.ValueMember = "Id";
-
-            // naplnění CheckedListBoxu (labely)
-            chlbLabely.Items.Clear();
-            foreach (var label in _data.Labely)
-            {
-                chlbLabely.Items.Add(label);
-            }
-
-            chlbLabely.DisplayMember = "Nazev";
+            _vytvoreniUkolu = new VytvoreniUkolu(_data);
 
 
-            // binding gridu
-            _bindingUkoly = new BindingList<Ukol>(_data.Ukoly);
-            dgvUkoly.DataSource = _bindingUkoly;
+            // naplnění uživatelů do ComboBoxu pro filtrování
+            cmbFilterUzivatel.DataSource = _data.Uzivatele.ToList();
+            cmbFilterUzivatel.DisplayMember = "Jmeno";
+            cmbFilterUzivatel.ValueMember = "Id";
+            cmbFilterUzivatel.SelectedIndex = -1;
 
-            _bindingUkoly.ResetBindings();
+            // naplnění štítků pro filtraci
+            cmbFilterStitek.DataSource = _data.Stitky.ToList();
+            cmbFilterStitek.DisplayMember = "Nazev";
+            cmbFilterStitek.ValueMember = "Id";
+            cmbFilterStitek.SelectedIndex = -1;
+
+            // naplnění stavu pro filtraci
+            cmbFilterStav.Items.AddRange(new[] { "všechny úkoly", "splněno", "nesplněno" });
+            cmbFilterStav.SelectedIndex = 0;
+
+            // první vykreslení
+            ObnovUI();
         }
 
 
-        //kliknutí na řádek -> zobrazit detaily
-        private void dgvUkoly_SelectionChanged(object sender, EventArgs e)
+        // ============= UI =============
+
+        // obnovení zobrazení úkolů (po změně dat) - znovu projít všechny úkoly a vytvořit pro ně „kartičky“
+        private void ObnovUI(IEnumerable<Ukol> zdroj = null)
         {
-            if (dgvUkoly.CurrentRow == null || dgvUkoly.CurrentRow.DataBoundItem == null)
-                return;
+            var data = zdroj ?? _data.Ukoly;
 
-            var ukol = (Ukol)dgvUkoly.CurrentRow.DataBoundItem;
+            flpUkoly.SuspendLayout();
+            flpUkoly.Controls.Clear();
 
-            nazevUkolu.Text = ukol.Nazev;
-            txtPopisu.Text = ukol.Popis;
-            chbSplneno.Checked = ukol.JeSplneno;
+            foreach (var ukol in data)
+                flpUkoly.Controls.Add(VytvorUkolPanel(ukol));
 
-            if (ukol.DatumSplneni.HasValue)
-                dtpDatumSplneni.Value = ukol.DatumSplneni.Value;
+            flpUkoly.ResumeLayout();
+        }
 
-            for (int i = 0; i < chlbLabely.Items.Count; i++)
+        // zobrazení úkolů v panelu (FlowLayoutPanel) - jak vytvořit „kartičku úkolu“
+        private Panel VytvorUkolPanel(Ukol ukol)
+        {
+            var panel = new Panel
             {
-                var label = (Entity.Label)chlbLabely.Items[i];
-                chlbLabely.SetItemChecked(i, ukol.LabelIds.Contains(label.Id));
+                Width = flpUkoly.ClientSize.Width - 30,
+                Height = 70,
+                BackColor = Color.FromArgb(35, 35, 55),
+                Margin = new Padding(8),
+                Padding = new Padding(10)
+            };
+
+            // checkbox (stav) - tlačítko dokončit/odznačit
+            var chkSplneno = new CheckBox
+            {
+                Checked = ukol.JeSplneno,
+                Location = new Point(10, 25)
+            };
+
+            chkSplneno.CheckedChanged += (s, e) =>
+            {
+                ukol.JeSplneno = chkSplneno.Checked;
+                _data.Ulozit();
+                ObnovUI();
+            };
+
+            // název úkolu
+            var lblNazev = new Label
+            {
+                Text = ukol.Nazev,
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                Location = new Point(40, 10),
+                AutoSize = true
+            };
+
+            // popis úkolu (zobrazit jen první řádek)
+            var lblPopis = new Label
+            {
+                Text = ukol.Popis.Split('\n').FirstOrDefault() ?? "",
+                ForeColor = Color.LightGray,
+                Font = new Font("Segoe UI", 9, FontStyle.Regular),
+                Location = new Point(50, 10),
+                AutoSize = true
+            };
+
+            // stav úkolu (splněno/nedokončeno/nehotovo) - barevný
+            var lblStatus = new Label
+            {
+                Location = new Point(250, 22),
+                AutoSize = true,
+                Font = new Font("Segoe UI", 9, FontStyle.Bold)
+            };
+
+            // ✅ STATUS (barevný)
+            if (ukol.JeSplneno)
+            {
+                lblStatus.Text = "✔ splněno";
+                lblStatus.ForeColor = Color.LightGreen;
+            }
+            else
+            {
+                lblStatus.Text = "❌ nehotovo";
+                lblStatus.ForeColor = Color.Red;
             }
 
-            if (ukol.UzivatelId.HasValue)
-                cmbUzivatel.SelectedValue = ukol.UzivatelId.Value;
-            else
-                cmbUzivatel.SelectedIndex = -1;
+            // datum splnění
+            var lblDatum = new Label
+            {
+                Text = ukol.DatumSplneni?.ToString("dd.MM.yyyy") ?? "",
+                ForeColor = Color.Gray,
+                Location = new Point(40, 35),
+                AutoSize = true
+            };
+
+            // tlačítko upravit
+            var btnUpravit = new Button
+            {
+                Text = "✏",
+                BackColor = Color.MediumPurple,
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat,
+                Location = new Point(panel.Width - 110, 18),
+                Width = 40
+            };
+
+            btnUpravit.FlatAppearance.BorderSize = 0;
+
+            btnUpravit.Click += (s, e) =>
+            {
+                var form = new FormUpravitUkol(_data.Uzivatele, _data.Stitky, ukol);
+
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    _data.Ulozit();
+                    ObnovUI();
+                }
+            };
+
+            // tlačítko smazat
+            var btnSmazat = new Button
+            {
+                Text = "🗑",
+                BackColor = Color.IndianRed,
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat,
+                Location = new Point(panel.Width - 60, 18),
+                Width = 40
+            };
+
+            btnSmazat.FlatAppearance.BorderSize = 0;
+
+            btnSmazat.Click += (s, e) =>
+            {
+                _vytvoreniUkolu.SmazatUkol(ukol.Id);
+                ObnovUI();
+            };
+
+
+            // přidání všech prvků do panelu
+            panel.Controls.Add(chkSplneno);
+            panel.Controls.Add(lblNazev);
+            panel.Controls.Add(lblPopis);
+            panel.Controls.Add(lblStatus);
+            panel.Controls.Add(lblDatum);
+            panel.Controls.Add(btnUpravit);
+            panel.Controls.Add(btnSmazat);
+
+            return panel;
         }
+
+
+        // ============= Akce =============
 
         //přidání úkolu (spojení na UI)
         private void btnPridat_Click(object sender, EventArgs e)
         {
-            var ukol = new Ukol
-            {
-                Nazev = nazevUkolu.Text,
-                Popis = txtPopisu.Text,
-                JeSplneno = chbSplneno.Checked,
-                DatumSplneni = dtpDatumSplneni.Value
-            };
-
-            ukol.LabelIds.Clear();
-
-            foreach (var item in chlbLabely.CheckedItems)
-            {
-                var label = (Entity.Label)item;
-                ukol.LabelIds.Add(label.Id);
-            }
-
-            // vytvoření úkolu s přiřazením uživatele (pokud je vybrán)
-            if (cmbUzivatel.SelectedItem != null)
-                ukol.UzivatelId = (int)cmbUzivatel.SelectedValue;
-
-            else
-                ukol.UzivatelId = null;
-
-
-            var form = new FormUpravitUkol(_data.Uzivatele, _data.Labely);
+            var form = new FormUpravitUkol(_data.Uzivatele, _data.Stitky);
 
             if (form.ShowDialog() == DialogResult.OK && form.Ukol != null)
             {
                 _vytvoreniUkolu.PridatUkol(form.Ukol);
-                _bindingUkoly.ResetBindings();
+                ObnovUI();
             }
         }
 
-        //Smazání úkolu
+        // filtrování
+        private void btnFiltrovat_Click(object sender, EventArgs e)
+        {
+            int? uzivatelId = cmbFilterUzivatel.SelectedIndex >= 0
+                ? (int?)cmbFilterUzivatel.SelectedValue
+                : null;
+
+            int? stitekId = cmbFilterStitek.SelectedIndex >= 0
+                ? (int?)cmbFilterStitek.SelectedValue
+                : null;
+
+            string stav = cmbFilterStav.SelectedItem?.ToString();
+
+            var filtered = _data.Ukoly.AsEnumerable();
+
+            if (uzivatelId != null)
+                filtered = filtered.Where(u => u.UzivatelId == uzivatelId);
+
+            if (stitekId != null)
+                filtered = filtered.Where(u => u.StitekId.Contains(stitekId.Value));
+
+            if (stav == "splněno")
+                filtered = filtered.Where(u => u.JeSplneno);
+
+            if (stav == "nedokončeno")
+                filtered = filtered.Where(u => !u.JeSplneno);
+
+            ObnovUI(filtered.ToList());
+        }
+
         private void btnSmazat_Click(object sender, EventArgs e)
         {
-            if (dgvUkoly.CurrentRow == null || dgvUkoly.CurrentRow.DataBoundItem == null) //!!! indexOutOfRangeException to furt dava
-                return;
-
-            var ukol = (Ukol)dgvUkoly.CurrentRow.DataBoundItem;
-
-            if (dgvUkoly.CurrentRow.IsNewRow)
-                return;
-
-            _vytvoreniUkolu.SmazatUkol(ukol.Id);
-
-            _bindingUkoly.ResetBindings();   // jen refresh
-
-            // volitelně zruš výběr
-            dgvUkoly.ClearSelection();
         }
 
-        //Upravení úkolu
         private void btnUpravit_Click(object sender, EventArgs e)
         {
-            if (dgvUkoly.CurrentRow == null || dgvUkoly.CurrentRow.DataBoundItem == null)
-                return;
-
-            var ukol = (Ukol)dgvUkoly.CurrentRow.DataBoundItem;
-
-            var form = new FormUpravitUkol(_data.Uzivatele, _data.Labely, ukol);
-
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                _data.Ulozit();
-                _bindingUkoly.ResetBindings();
-            }
         }
 
-        /* Labely(štítky)
-         * - každý úkol může mít více labelů
-         * 
-         * CheckedListBox → clbLabely
-         * TextBox → nový label
-         * Button "+" → přidat label
-        */
-        private void btnPridatLabel_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtLabel.Text))
-                return;
-
-            var label = new Entity.Label
-            {
-                Id = _data.Labely.Any() ? _data.Labely.Max(l => l.Id) + 1 : 1,
-                Nazev = txtLabel.Text
-            };
-
-            _data.Labely.Add(label);
-            _data.Ulozit();
-
-            //chlbLabely.DataSource = null;
-            //chlbLabely.DataSource = _data.Labely;
-            //chlbLabely.DisplayMember = "Nazev";
-
-            // přidání do UI
-            chlbLabely.Items.Add(label);
-
-            txtLabel.Text = "";
         }
 
-        private void btnPridatUzivatele_Click(object sender, EventArgs e)
+        private void topPanel_Paint(object sender, PaintEventArgs e)
         {
-            var user = new Uzivatel
-            {
-                Id = _data.Uzivatele.Any() ? _data.Uzivatele.Max(u => u.Id) + 1 : 1,
-                Jmeno = jmenoUzivatele.Text
-            };
 
-            _data.Uzivatele.Add(user);
-            _data.Ulozit();
+        }
 
-            cmbUzivatel.DataSource = null;
-            cmbUzivatel.DataSource = _data.Uzivatele;
-            cmbUzivatel.DisplayMember = "Jmeno";
-            cmbUzivatel.ValueMember = "Id";
+        private void lblPopis_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

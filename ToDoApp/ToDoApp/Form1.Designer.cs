@@ -28,264 +28,184 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dgvUkoly = new DataGridView();
-            Pridat = new Button();
-            Smazat = new Button();
-            Upravit = new Button();
-            labelNazev = new Label();
-            labelPopis = new Label();
-            labelDatumSplneni = new Label();
-            nazevUkolu = new TextBox();
-            txtPopisu = new TextBox();
-            dtpDatumSplneni = new DateTimePicker();
-            chbSplneno = new CheckBox();
-            cmbUzivatel = new ComboBox();
-            chlbLabely = new CheckedListBox();
-            labelLabel = new Label();
-            PridatLabel = new Button();
-            labelNazevLabelu = new Label();
-            txtLabel = new TextBox();
-            labelUzivatel = new Label();
-            jmenoUzivatele = new TextBox();
-            pridatUzivatele = new Button();
-            ((System.ComponentModel.ISupportInitialize)dgvUkoly).BeginInit();
+            topPanel = new Panel();
+            btnFiltrovat = new Button();
+            btnPridat = new Button();
+            cmbFilterStitek = new ComboBox();
+            lblStatus = new Label();
+            cmbFilterUzivatel = new ComboBox();
+            lblDatum = new Label();
+            cmbFilterStav = new ComboBox();
+            lblPopis = new Label();
+            lblNazev = new Label();
+            flpUkoly = new FlowLayoutPanel();
+            topPanel.SuspendLayout();
             SuspendLayout();
             // 
-            // dgvUkoly
+            // topPanel
             // 
-            dgvUkoly.BackgroundColor = SystemColors.Control;
-            dgvUkoly.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvUkoly.Location = new Point(12, 12);
-            dgvUkoly.MultiSelect = false;
-            dgvUkoly.Name = "dgvUkoly";
-            dgvUkoly.ReadOnly = true;
-            dgvUkoly.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvUkoly.Size = new Size(450, 426);
-            dgvUkoly.TabIndex = 0;
+            topPanel.BackColor = Color.Purple;
+            topPanel.Controls.Add(btnFiltrovat);
+            topPanel.Controls.Add(btnPridat);
+            topPanel.Controls.Add(cmbFilterStitek);
+            topPanel.Controls.Add(lblStatus);
+            topPanel.Controls.Add(cmbFilterUzivatel);
+            topPanel.Controls.Add(lblDatum);
+            topPanel.Controls.Add(cmbFilterStav);
+            topPanel.Controls.Add(lblPopis);
+            topPanel.Controls.Add(lblNazev);
+            topPanel.Dock = DockStyle.Top;
+            topPanel.Location = new Point(0, 0);
+            topPanel.Name = "topPanel";
+            topPanel.Size = new Size(900, 109);
+            topPanel.TabIndex = 1;
+            topPanel.Paint += topPanel_Paint;
             // 
-            // Pridat
+            // btnFiltrovat
             // 
-            Pridat.DialogResult = DialogResult.OK;
-            Pridat.Location = new Point(483, 415);
-            Pridat.Name = "Pridat";
-            Pridat.Size = new Size(75, 23);
-            Pridat.TabIndex = 1;
-            Pridat.Text = "přidat";
-            Pridat.UseVisualStyleBackColor = true;
-            Pridat.Click += btnPridat_Click;
+            btnFiltrovat.BackColor = Color.DarkViolet;
+            btnFiltrovat.FlatAppearance.BorderSize = 0;
+            btnFiltrovat.FlatStyle = FlatStyle.Flat;
+            btnFiltrovat.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            btnFiltrovat.ForeColor = Color.White;
+            btnFiltrovat.Location = new Point(465, 16);
+            btnFiltrovat.Name = "btnFiltrovat";
+            btnFiltrovat.Size = new Size(100, 30);
+            btnFiltrovat.TabIndex = 4;
+            btnFiltrovat.Text = "Filtrovat";
+            btnFiltrovat.UseVisualStyleBackColor = false;
+            btnFiltrovat.Click += btnFiltrovat_Click;
             // 
-            // Smazat
+            // btnPridat
             // 
-            Smazat.DialogResult = DialogResult.OK;
-            Smazat.Location = new Point(698, 415);
-            Smazat.Name = "Smazat";
-            Smazat.Size = new Size(75, 23);
-            Smazat.TabIndex = 2;
-            Smazat.Text = "smazat";
-            Smazat.UseVisualStyleBackColor = true;
-            Smazat.Click += btnSmazat_Click;
+            btnPridat.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnPridat.BackColor = Color.DarkViolet;
+            btnPridat.FlatAppearance.BorderSize = 0;
+            btnPridat.FlatStyle = FlatStyle.Flat;
+            btnPridat.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            btnPridat.ForeColor = Color.White;
+            btnPridat.Location = new Point(775, 58);
+            btnPridat.Name = "btnPridat";
+            btnPridat.Size = new Size(100, 30);
+            btnPridat.TabIndex = 0;
+            btnPridat.Text = "Přidat";
+            btnPridat.UseVisualStyleBackColor = false;
+            btnPridat.Click += btnPridat_Click;
             // 
-            // Upravit
+            // cmbFilterStitek
             // 
-            Upravit.DialogResult = DialogResult.OK;
-            Upravit.Location = new Point(593, 415);
-            Upravit.Name = "Upravit";
-            Upravit.Size = new Size(75, 23);
-            Upravit.TabIndex = 3;
-            Upravit.Text = "upravit";
-            Upravit.UseVisualStyleBackColor = true;
-            Upravit.Click += btnUpravit_Click;
+            cmbFilterStitek.ForeColor = Color.FromArgb(35, 35, 55);
+            cmbFilterStitek.Location = new Point(308, 22);
+            cmbFilterStitek.Name = "cmbFilterStitek";
+            cmbFilterStitek.Size = new Size(140, 23);
+            cmbFilterStitek.TabIndex = 2;
+            cmbFilterStitek.Text = "Štítky";
             // 
-            // labelNazev
+            // lblStatus
             // 
-            labelNazev.AutoSize = true;
-            labelNazev.Location = new Point(485, 25);
-            labelNazev.Name = "labelNazev";
-            labelNazev.Size = new Size(73, 15);
-            labelNazev.TabIndex = 4;
-            labelNazev.Text = "název úkolu:";
-            labelNazev.TextAlign = ContentAlignment.TopCenter;
+            lblStatus.AutoSize = true;
+            lblStatus.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            lblStatus.ForeColor = SystemColors.ControlLightLight;
+            lblStatus.Location = new Point(653, 68);
+            lblStatus.Name = "lblStatus";
+            lblStatus.Size = new Size(53, 20);
+            lblStatus.TabIndex = 3;
+            lblStatus.Text = "Status";
             // 
-            // labelPopis
+            // cmbFilterUzivatel
             // 
-            labelPopis.AutoSize = true;
-            labelPopis.Location = new Point(486, 54);
-            labelPopis.Name = "labelPopis";
-            labelPopis.Size = new Size(72, 15);
-            labelPopis.TabIndex = 5;
-            labelPopis.Text = "popis úkolu:";
+            cmbFilterUzivatel.ForeColor = Color.FromArgb(35, 35, 55);
+            cmbFilterUzivatel.Location = new Point(162, 22);
+            cmbFilterUzivatel.Name = "cmbFilterUzivatel";
+            cmbFilterUzivatel.Size = new Size(140, 23);
+            cmbFilterUzivatel.TabIndex = 1;
+            cmbFilterUzivatel.Text = "Uživatel";
             // 
-            // labelDatumSplneni
+            // lblDatum
             // 
-            labelDatumSplneni.AccessibleRole = AccessibleRole.None;
-            labelDatumSplneni.AutoSize = true;
-            labelDatumSplneni.Location = new Point(486, 94);
-            labelDatumSplneni.Name = "labelDatumSplneni";
-            labelDatumSplneni.Size = new Size(86, 15);
-            labelDatumSplneni.TabIndex = 6;
-            labelDatumSplneni.Text = "datum splnění:";
+            lblDatum.AutoSize = true;
+            lblDatum.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            lblDatum.ForeColor = SystemColors.ControlLightLight;
+            lblDatum.Location = new Point(454, 68);
+            lblDatum.Name = "lblDatum";
+            lblDatum.Size = new Size(111, 20);
+            lblDatum.TabIndex = 2;
+            lblDatum.Text = "Datum splnění";
             // 
-            // nazevUkolu
+            // cmbFilterStav
             // 
-            nazevUkolu.Location = new Point(599, 22);
-            nazevUkolu.Name = "nazevUkolu";
-            nazevUkolu.Size = new Size(174, 23);
-            nazevUkolu.TabIndex = 7;
+            cmbFilterStav.ForeColor = Color.FromArgb(35, 35, 55);
+            cmbFilterStav.Location = new Point(16, 22);
+            cmbFilterStav.Name = "cmbFilterStav";
+            cmbFilterStav.Size = new Size(140, 23);
+            cmbFilterStav.TabIndex = 3;
+            cmbFilterStav.Text = "Stav";
             // 
-            // txtPopisu
+            // lblPopis
             // 
-            txtPopisu.Location = new Point(599, 51);
-            txtPopisu.Name = "txtPopisu";
-            txtPopisu.Size = new Size(174, 23);
-            txtPopisu.TabIndex = 8;
+            lblPopis.AutoSize = true;
+            lblPopis.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            lblPopis.ForeColor = SystemColors.ControlLightLight;
+            lblPopis.Location = new Point(162, 68);
+            lblPopis.Name = "lblPopis";
+            lblPopis.Size = new Size(47, 20);
+            lblPopis.TabIndex = 1;
+            lblPopis.Text = "Popis";
+            lblPopis.Click += lblPopis_Click;
             // 
-            // dtpDatumSplneni
+            // lblNazev
             // 
-            dtpDatumSplneni.Location = new Point(599, 88);
-            dtpDatumSplneni.Name = "dtpDatumSplneni";
-            dtpDatumSplneni.Size = new Size(174, 23);
-            dtpDatumSplneni.TabIndex = 9;
+            lblNazev.AutoSize = true;
+            lblNazev.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            lblNazev.ForeColor = SystemColors.ControlLightLight;
+            lblNazev.Location = new Point(33, 68);
+            lblNazev.Name = "lblNazev";
+            lblNazev.Size = new Size(41, 20);
+            lblNazev.TabIndex = 0;
+            lblNazev.Text = "Úkol";
             // 
-            // chbSplneno
+            // flpUkoly
             // 
-            chbSplneno.AutoSize = true;
-            chbSplneno.Location = new Point(614, 370);
-            chbSplneno.Name = "chbSplneno";
-            chbSplneno.Size = new Size(68, 19);
-            chbSplneno.TabIndex = 10;
-            chbSplneno.Text = "splněno";
-            chbSplneno.UseVisualStyleBackColor = true;
-            // 
-            // cmbUzivatel
-            // 
-            cmbUzivatel.FormattingEnabled = true;
-            cmbUzivatel.Location = new Point(599, 123);
-            cmbUzivatel.Name = "cmbUzivatel";
-            cmbUzivatel.Size = new Size(174, 23);
-            cmbUzivatel.TabIndex = 11;
-            // 
-            // chlbLabely
-            // 
-            chlbLabely.FormattingEnabled = true;
-            chlbLabely.Location = new Point(483, 241);
-            chlbLabely.Name = "chlbLabely";
-            chlbLabely.Size = new Size(100, 148);
-            chlbLabely.TabIndex = 12;
-            // 
-            // labelLabel
-            // 
-            labelLabel.AutoSize = true;
-            labelLabel.Location = new Point(483, 223);
-            labelLabel.Name = "labelLabel";
-            labelLabel.Size = new Size(35, 15);
-            labelLabel.TabIndex = 13;
-            labelLabel.Text = "štítky";
-            // 
-            // PridatLabel
-            // 
-            PridatLabel.Location = new Point(684, 288);
-            PridatLabel.Name = "PridatLabel";
-            PridatLabel.Size = new Size(89, 23);
-            PridatLabel.TabIndex = 14;
-            PridatLabel.Text = "přidat štítek";
-            PridatLabel.UseVisualStyleBackColor = true;
-            // 
-            // labelNazevLabelu
-            // 
-            labelNazevLabelu.AutoSize = true;
-            labelNazevLabelu.Location = new Point(599, 241);
-            labelNazevLabelu.Name = "labelNazevLabelu";
-            labelNazevLabelu.Size = new Size(69, 15);
-            labelNazevLabelu.TabIndex = 15;
-            labelNazevLabelu.Text = "název štítku";
-            // 
-            // txtLabel
-            // 
-            txtLabel.Location = new Point(599, 259);
-            txtLabel.Name = "txtLabel";
-            txtLabel.Size = new Size(174, 23);
-            txtLabel.TabIndex = 16;
-            // 
-            // labelUzivatel
-            // 
-            labelUzivatel.AutoSize = true;
-            labelUzivatel.Location = new Point(486, 131);
-            labelUzivatel.Name = "labelUzivatel";
-            labelUzivatel.Size = new Size(93, 15);
-            labelUzivatel.TabIndex = 17;
-            labelUzivatel.Text = "jméno uživatele:";
-            // 
-            // jmenoUzivatele
-            // 
-            jmenoUzivatele.Location = new Point(599, 152);
-            jmenoUzivatele.Name = "jmenoUzivatele";
-            jmenoUzivatele.Size = new Size(174, 23);
-            jmenoUzivatele.TabIndex = 18;
-            // 
-            // pridatUzivatele
-            // 
-            pridatUzivatele.Location = new Point(672, 181);
-            pridatUzivatele.Name = "pridatUzivatele";
-            pridatUzivatele.RightToLeft = RightToLeft.Yes;
-            pridatUzivatele.Size = new Size(101, 23);
-            pridatUzivatele.TabIndex = 19;
-            pridatUzivatele.Text = "přidat uživatele";
-            pridatUzivatele.UseVisualStyleBackColor = true;
+            flpUkoly.AutoScroll = true;
+            flpUkoly.BackColor = Color.Transparent;
+            flpUkoly.Dock = DockStyle.Fill;
+            flpUkoly.FlowDirection = FlowDirection.TopDown;
+            flpUkoly.Location = new Point(0, 109);
+            flpUkoly.Name = "flpUkoly";
+            flpUkoly.Padding = new Padding(10);
+            flpUkoly.Size = new Size(900, 491);
+            flpUkoly.TabIndex = 0;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.Control;
-            ClientSize = new Size(800, 450);
-            Controls.Add(pridatUzivatele);
-            Controls.Add(jmenoUzivatele);
-            Controls.Add(labelUzivatel);
-            Controls.Add(txtLabel);
-            Controls.Add(labelNazevLabelu);
-            Controls.Add(PridatLabel);
-            Controls.Add(labelLabel);
-            Controls.Add(chlbLabely);
-            Controls.Add(cmbUzivatel);
-            Controls.Add(chbSplneno);
-            Controls.Add(dtpDatumSplneni);
-            Controls.Add(txtPopisu);
-            Controls.Add(nazevUkolu);
-            Controls.Add(labelDatumSplneni);
-            Controls.Add(labelPopis);
-            Controls.Add(labelNazev);
-            Controls.Add(Upravit);
-            Controls.Add(Smazat);
-            Controls.Add(Pridat);
-            Controls.Add(dgvUkoly);
+            BackColor = Color.FromArgb(20, 20, 35);
+            ClientSize = new Size(900, 600);
+            Controls.Add(flpUkoly);
+            Controls.Add(topPanel);
             Name = "Form1";
             Text = "ToDo App";
-            ((System.ComponentModel.ISupportInitialize)dgvUkoly).EndInit();
+            topPanel.ResumeLayout(false);
+            topPanel.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private DataGridView dgvUkoly;
-        private Button Pridat;
-        private Button Smazat;
-        private Button Upravit;
-        private Label labelNazev;
-        private Label labelPopis;
-        private Label labelDatumSplneni;
-        private TextBox nazevUkolu;
-        private TextBox txtPopisu;
-        private DateTimePicker dtpDatumSplneni;
-        private CheckBox chbSplneno;
-        private ComboBox cmbUzivatel;
-        private CheckedListBox chlbLabely;
-        private Label labelLabel;
-        private Button PridatLabel;
-        private Label labelNazevLabelu;
-        private TextBox txtLabel;
-        private Label labelUzivatel;
-        private TextBox jmenoUzivatele;
-        private Button pridatUzivatele;
+        private Panel topPanel;
+
+        private ComboBox cmbFilterUzivatel;
+        private ComboBox cmbFilterStitek;
+        private ComboBox cmbFilterStav;
+
+        private Button btnFiltrovat;
+
+        private FlowLayoutPanel flpUkoly;
+        private Label lblStatus;
+        private Label lblDatum;
+        private Label lblPopis;
+        private Label lblNazev;
+        public Button btnPridat;
     }
 }

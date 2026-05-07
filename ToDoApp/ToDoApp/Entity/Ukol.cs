@@ -14,8 +14,9 @@ namespace ToDoApp.Entity
         public DateTime Vytvoreno { get; set; }
         public DateTime? DatumSplneni { get; set; }
         public bool JeSplneno { get; set; }
+        public string Stav { get; set; } // "hotovo", "rozpracováno", "nehotovo"
 
         public int? UzivatelId { get; set; }
-        public List<int> LabelIds { get; set; } = new();
+        public List<int> StitekId { get; set; } = new();
     }
 }

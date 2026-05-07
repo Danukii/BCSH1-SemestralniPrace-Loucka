@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToDoApp.Entity
 {
-    public class Label
+    public class Stitek
     {
         public int Id { get; set; }
         public string Nazev { get; set; }

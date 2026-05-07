@@ -16,7 +16,7 @@ namespace ToDoApp.Data
 
         public List<Ukol> Ukoly { get; set; } = new();
         public List<Uzivatel> Uzivatele { get; set; } = new();
-        public List<Entity.Label> Labely { get; set; } = new();
+        public List<Stitek> Stitky { get; set; } = new();
 
         public void Ulozit()
         {
@@ -40,7 +40,7 @@ namespace ToDoApp.Data
 
             data.Ukoly ??= new List<Ukol>();
             data.Uzivatele ??= new List<Uzivatel>();
-            data.Labely ??= new List<Entity.Label>();
+            data.Stitky ??= new List<Stitek>();
 
             return data;
         }
