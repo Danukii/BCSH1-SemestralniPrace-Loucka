@@ -41,9 +41,9 @@
             lblUzivatele = new Label();
             lblDatumSplneni = new Label();
             lblStitky = new Label();
-            txtStitek = new TextBox();
+            txtNovyStitek = new TextBox();
             btnPridatStitek = new Button();
-            txtUzivatel = new TextBox();
+            txtNovyUzivatel = new TextBox();
             btnPridatUzivatele = new Button();
             SuspendLayout();
             // 
@@ -178,15 +178,15 @@
             lblStitky.TabIndex = 12;
             lblStitky.Text = "vyberte / vytvořte šítek";
             // 
-            // txtStitek
+            // txtNovyStitek
             // 
-            txtStitek.ForeColor = SystemColors.WindowText;
-            txtStitek.Location = new Point(393, 211);
-            txtStitek.Name = "txtStitek";
-            txtStitek.Size = new Size(100, 23);
-            txtStitek.TabIndex = 13;
-            txtStitek.Text = "nový štítek";
-            txtStitek.TextAlign = HorizontalAlignment.Right;
+            txtNovyStitek.ForeColor = SystemColors.WindowText;
+            txtNovyStitek.Location = new Point(393, 211);
+            txtNovyStitek.Name = "txtNovyStitek";
+            txtNovyStitek.Size = new Size(100, 23);
+            txtNovyStitek.TabIndex = 13;
+            txtNovyStitek.Text = "nový štítek";
+            txtNovyStitek.TextAlign = HorizontalAlignment.Right;
             // 
             // btnPridatStitek
             // 
@@ -199,16 +199,17 @@
             btnPridatStitek.TabIndex = 14;
             btnPridatStitek.Text = "+ štítek";
             btnPridatStitek.UseVisualStyleBackColor = false;
+            btnPridatStitek.Click += btnPridatStitek_Click;
             // 
-            // txtUzivatel
+            // txtNovyUzivatel
             // 
-            txtUzivatel.ImeMode = ImeMode.NoControl;
-            txtUzivatel.Location = new Point(393, 135);
-            txtUzivatel.Name = "txtUzivatel";
-            txtUzivatel.Size = new Size(100, 23);
-            txtUzivatel.TabIndex = 15;
-            txtUzivatel.Text = "nový uživatel";
-            txtUzivatel.TextAlign = HorizontalAlignment.Right;
+            txtNovyUzivatel.ImeMode = ImeMode.NoControl;
+            txtNovyUzivatel.Location = new Point(393, 135);
+            txtNovyUzivatel.Name = "txtNovyUzivatel";
+            txtNovyUzivatel.Size = new Size(100, 23);
+            txtNovyUzivatel.TabIndex = 15;
+            txtNovyUzivatel.Text = "nový uživatel";
+            txtNovyUzivatel.TextAlign = HorizontalAlignment.Right;
             // 
             // btnPridatUzivatele
             // 
@@ -221,6 +222,7 @@
             btnPridatUzivatele.TabIndex = 16;
             btnPridatUzivatele.Text = "+ uživatel";
             btnPridatUzivatele.UseVisualStyleBackColor = false;
+            btnPridatUzivatele.Click += btnPridatUzivatele_Click_1;
             // 
             // FormUpravitUkol
             // 
@@ -229,9 +231,9 @@
             BackColor = Color.Purple;
             ClientSize = new Size(526, 380);
             Controls.Add(btnPridatUzivatele);
-            Controls.Add(txtUzivatel);
+            Controls.Add(txtNovyUzivatel);
             Controls.Add(btnPridatStitek);
-            Controls.Add(txtStitek);
+            Controls.Add(txtNovyStitek);
             Controls.Add(lblStitky);
             Controls.Add(lblDatumSplneni);
             Controls.Add(lblUzivatele);
@@ -269,9 +271,9 @@
         private Label lblUzivatele;
         private Label lblDatumSplneni;
         private Label lblStitky;
-        private TextBox txtStitek;
+        private TextBox txtNovyStitek;
         private Button btnPridatStitek;
-        private TextBox txtUzivatel;
+        private TextBox txtNovyUzivatel;
         private Button btnPridatUzivatele;
     }
 }

@@ -120,7 +120,7 @@ namespace ToDoApp
 
         private void btnPridatUzivatele_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtUzivatel.Text))
+            if (string.IsNullOrWhiteSpace(txtNovyUzivatel.Text))
                 return;
 
             var user = new Uzivatel
@@ -129,7 +129,7 @@ namespace ToDoApp
                     ? _uzivatele.Max(u => u.Id) + 1
                     : 1,
 
-                Jmeno = txtUzivatel.Text
+                Jmeno = txtNovyUzivatel.Text
             };
 
             _uzivatele.Add(user);
@@ -139,12 +139,12 @@ namespace ToDoApp
             cmbUzivatel.DisplayMember = "Jmeno";
             cmbUzivatel.ValueMember = "Id";
 
-            txtUzivatel.Clear();
+            txtNovyUzivatel.Clear();
         }
 
         private void btnPridatLabel_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtStitek.Text))
+            if (string.IsNullOrWhiteSpace(txtNovyStitek.Text))
                 return;
 
             var label = new Stitek
@@ -153,7 +153,7 @@ namespace ToDoApp
                     ? _stitky.Max(l => l.Id) + 1
                     : 1,
 
-                Nazev = txtStitek.Text
+                Nazev = txtNovyStitek.Text
             };
 
             _stitky.Add(label);
@@ -167,7 +167,61 @@ namespace ToDoApp
 
             chlbStitky.DisplayMember = "Nazev";
 
-            txtStitek.Clear();
+            txtNovyStitek.Clear();
+        }
+
+        private void btnPridatUzivatele_Click_1(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtNovyUzivatel.Text))
+                return;
+
+            var user = new Uzivatel
+            {
+                Id = _uzivatele.Any()
+                    ? _uzivatele.Max(u => u.Id) + 1
+                    : 1,
+
+                Jmeno = txtNovyUzivatel.Text
+            };
+
+            _uzivatele.Add(user);
+
+            cmbUzivatel.DataSource = null;
+            cmbUzivatel.DataSource = _uzivatele;
+            cmbUzivatel.DisplayMember = "Jmeno";
+            cmbUzivatel.ValueMember = "Id";
+
+            cmbUzivatel.SelectedItem = user;
+
+            txtNovyUzivatel.Clear();
+        }
+
+        private void btnPridatStitek_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtNovyStitek.Text))
+                return;
+
+            var label = new Stitek
+            {
+                Id = _stitky.Any()
+                    ? _stitky.Max(l => l.Id) + 1
+                    : 1,
+
+                Nazev = txtNovyStitek.Text
+            };
+
+            _stitky.Add(label);
+
+            chlbStitky.Items.Clear();
+
+            foreach (var l in _stitky)
+            {
+                chlbStitky.Items.Add(l);
+            }
+
+            chlbStitky.DisplayMember = "Nazev";
+
+            txtNovyStitek.Clear();
         }
     }
 }

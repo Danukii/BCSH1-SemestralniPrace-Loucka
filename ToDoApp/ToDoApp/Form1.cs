@@ -88,7 +88,7 @@ namespace ToDoApp
             var panel = new Panel
             {
                 Width = flpUkoly.ClientSize.Width - 30,
-                Height = 70,
+                Height = 90,
                 BackColor = Color.FromArgb(35, 35, 55),
                 Margin = new Padding(8),
                 Padding = new Padding(10)
@@ -121,7 +121,7 @@ namespace ToDoApp
             // popis úkolu (zobrazit jen první řádek)
             var lblPopis = new Label
             {
-                Text = ukol.Popis.Split('\n').FirstOrDefault() ?? "",
+                Text = ukol.Popis, //ukol.Popis.Split('\n').FirstOrDefault() ?? ""
                 ForeColor = Color.LightGray,
                 Font = new Font("Segoe UI", 9, FontStyle.Regular),
                 Location = new Point(50, 10),
@@ -151,9 +151,9 @@ namespace ToDoApp
             // datum splnění
             var lblDatum = new Label
             {
-                Text = ukol.DatumSplneni?.ToString("dd.MM.yyyy") ?? "",
+                Text = ukol.DatumSplneni.HasValue? ukol.DatumSplneni.Value.ToString("dd.MM.yyyy"): "",
                 ForeColor = Color.Gray,
-                Location = new Point(40, 35),
+                Location = new Point(40, 50),
                 AutoSize = true
             };
 
