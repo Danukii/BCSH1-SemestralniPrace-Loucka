@@ -41,11 +41,15 @@
             lblUzivatele = new Label();
             lblDatumSplneni = new Label();
             lblStitky = new Label();
+            txtStitek = new TextBox();
+            btnPridatStitek = new Button();
+            txtUzivatel = new TextBox();
+            btnPridatUzivatele = new Button();
             SuspendLayout();
             // 
             // txtNazev
             // 
-            txtNazev.ForeColor = SystemColors.ScrollBar;
+            txtNazev.ForeColor = SystemColors.WindowText;
             txtNazev.Location = new Point(33, 41);
             txtNazev.Name = "txtNazev";
             txtNazev.Size = new Size(175, 23);
@@ -54,7 +58,7 @@
             // 
             // txtPopis
             // 
-            txtPopis.ForeColor = SystemColors.ScrollBar;
+            txtPopis.ForeColor = SystemColors.WindowText;
             txtPopis.Location = new Point(33, 96);
             txtPopis.Multiline = true;
             txtPopis.Name = "txtPopis";
@@ -64,24 +68,26 @@
             // 
             // btnOk
             // 
+            btnOk.BackColor = Color.MediumSpringGreen;
             btnOk.ForeColor = SystemColors.ControlText;
             btnOk.Location = new Point(318, 326);
             btnOk.Name = "btnOk";
             btnOk.Size = new Size(75, 23);
             btnOk.TabIndex = 2;
             btnOk.Text = "OK";
-            btnOk.UseVisualStyleBackColor = true;
+            btnOk.UseVisualStyleBackColor = false;
             btnOk.Click += btnOK_Click;
             // 
             // btnZrusit
             // 
-            btnZrusit.ForeColor = SystemColors.ControlText;
+            btnZrusit.BackColor = Color.DeepPink;
+            btnZrusit.ForeColor = SystemColors.ControlLightLight;
             btnZrusit.Location = new Point(418, 326);
             btnZrusit.Name = "btnZrusit";
             btnZrusit.Size = new Size(75, 23);
             btnZrusit.TabIndex = 3;
             btnZrusit.Text = "zrušit";
-            btnZrusit.UseVisualStyleBackColor = true;
+            btnZrusit.UseVisualStyleBackColor = false;
             btnZrusit.Click += btnCancel_Click;
             // 
             // dtpDatum
@@ -94,7 +100,7 @@
             // chbSplneno
             // 
             chbSplneno.AutoSize = true;
-            chbSplneno.Location = new Point(318, 144);
+            chbSplneno.Location = new Point(271, 246);
             chbSplneno.Name = "chbSplneno";
             chbSplneno.Size = new Size(68, 19);
             chbSplneno.TabIndex = 5;
@@ -172,12 +178,60 @@
             lblStitky.TabIndex = 12;
             lblStitky.Text = "vyberte / vytvořte šítek";
             // 
+            // txtStitek
+            // 
+            txtStitek.ForeColor = SystemColors.WindowText;
+            txtStitek.Location = new Point(393, 211);
+            txtStitek.Name = "txtStitek";
+            txtStitek.Size = new Size(100, 23);
+            txtStitek.TabIndex = 13;
+            txtStitek.Text = "nový štítek";
+            txtStitek.TextAlign = HorizontalAlignment.Right;
+            // 
+            // btnPridatStitek
+            // 
+            btnPridatStitek.BackColor = Color.DarkViolet;
+            btnPridatStitek.FlatStyle = FlatStyle.System;
+            btnPridatStitek.ForeColor = SystemColors.WindowText;
+            btnPridatStitek.Location = new Point(416, 240);
+            btnPridatStitek.Name = "btnPridatStitek";
+            btnPridatStitek.Size = new Size(77, 25);
+            btnPridatStitek.TabIndex = 14;
+            btnPridatStitek.Text = "+ štítek";
+            btnPridatStitek.UseVisualStyleBackColor = false;
+            // 
+            // txtUzivatel
+            // 
+            txtUzivatel.ImeMode = ImeMode.NoControl;
+            txtUzivatel.Location = new Point(393, 135);
+            txtUzivatel.Name = "txtUzivatel";
+            txtUzivatel.Size = new Size(100, 23);
+            txtUzivatel.TabIndex = 15;
+            txtUzivatel.Text = "nový uživatel";
+            txtUzivatel.TextAlign = HorizontalAlignment.Right;
+            // 
+            // btnPridatUzivatele
+            // 
+            btnPridatUzivatele.BackColor = Color.DarkViolet;
+            btnPridatUzivatele.FlatStyle = FlatStyle.System;
+            btnPridatUzivatele.ForeColor = SystemColors.WindowText;
+            btnPridatUzivatele.Location = new Point(410, 164);
+            btnPridatUzivatele.Name = "btnPridatUzivatele";
+            btnPridatUzivatele.Size = new Size(83, 25);
+            btnPridatUzivatele.TabIndex = 16;
+            btnPridatUzivatele.Text = "+ uživatel";
+            btnPridatUzivatele.UseVisualStyleBackColor = false;
+            // 
             // FormUpravitUkol
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Purple;
             ClientSize = new Size(526, 380);
+            Controls.Add(btnPridatUzivatele);
+            Controls.Add(txtUzivatel);
+            Controls.Add(btnPridatStitek);
+            Controls.Add(txtStitek);
             Controls.Add(lblStitky);
             Controls.Add(lblDatumSplneni);
             Controls.Add(lblUzivatele);
@@ -215,5 +269,9 @@
         private Label lblUzivatele;
         private Label lblDatumSplneni;
         private Label lblStitky;
+        private TextBox txtStitek;
+        private Button btnPridatStitek;
+        private TextBox txtUzivatel;
+        private Button btnPridatUzivatele;
     }
 }

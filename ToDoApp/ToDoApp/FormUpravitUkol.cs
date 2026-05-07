@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Reflection.Emit;
 using System.Text;
 using System.Windows.Forms;
 using ToDoApp.Entity;
@@ -115,6 +116,58 @@ namespace ToDoApp
         private void FormUpravitUkol_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnPridatUzivatele_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtUzivatel.Text))
+                return;
+
+            var user = new Uzivatel
+            {
+                Id = _uzivatele.Any()
+                    ? _uzivatele.Max(u => u.Id) + 1
+                    : 1,
+
+                Jmeno = txtUzivatel.Text
+            };
+
+            _uzivatele.Add(user);
+
+            cmbUzivatel.DataSource = null;
+            cmbUzivatel.DataSource = _uzivatele;
+            cmbUzivatel.DisplayMember = "Jmeno";
+            cmbUzivatel.ValueMember = "Id";
+
+            txtUzivatel.Clear();
+        }
+
+        private void btnPridatLabel_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtStitek.Text))
+                return;
+
+            var label = new Stitek
+            {
+                Id = _stitky.Any()
+                    ? _stitky.Max(l => l.Id) + 1
+                    : 1,
+
+                Nazev = txtStitek.Text
+            };
+
+            _stitky.Add(label);
+
+            chlbStitky.Items.Clear();
+
+            foreach (var l in _stitky)
+            {
+                chlbStitky.Items.Add(l);
+            }
+
+            chlbStitky.DisplayMember = "Nazev";
+
+            txtStitek.Clear();
         }
     }
 }

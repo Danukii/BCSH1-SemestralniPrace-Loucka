@@ -37,7 +37,6 @@
             lblDatum = new Label();
             cmbFilterStav = new ComboBox();
             lblPopis = new Label();
-            lblNazev = new Label();
             flpUkoly = new FlowLayoutPanel();
             topPanel.SuspendLayout();
             SuspendLayout();
@@ -53,11 +52,10 @@
             topPanel.Controls.Add(lblDatum);
             topPanel.Controls.Add(cmbFilterStav);
             topPanel.Controls.Add(lblPopis);
-            topPanel.Controls.Add(lblNazev);
             topPanel.Dock = DockStyle.Top;
             topPanel.Location = new Point(0, 0);
             topPanel.Name = "topPanel";
-            topPanel.Size = new Size(900, 109);
+            topPanel.Size = new Size(900, 92);
             topPanel.TabIndex = 1;
             topPanel.Paint += topPanel_Paint;
             // 
@@ -68,7 +66,7 @@
             btnFiltrovat.FlatStyle = FlatStyle.Flat;
             btnFiltrovat.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
             btnFiltrovat.ForeColor = Color.White;
-            btnFiltrovat.Location = new Point(465, 16);
+            btnFiltrovat.Location = new Point(450, 12);
             btnFiltrovat.Name = "btnFiltrovat";
             btnFiltrovat.Size = new Size(100, 30);
             btnFiltrovat.TabIndex = 4;
@@ -84,18 +82,18 @@
             btnPridat.FlatStyle = FlatStyle.Flat;
             btnPridat.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
             btnPridat.ForeColor = Color.White;
-            btnPridat.Location = new Point(775, 58);
+            btnPridat.Location = new Point(778, 46);
             btnPridat.Name = "btnPridat";
             btnPridat.Size = new Size(100, 30);
             btnPridat.TabIndex = 0;
-            btnPridat.Text = "Přidat";
+            btnPridat.Text = "Přidat úkol";
             btnPridat.UseVisualStyleBackColor = false;
             btnPridat.Click += btnPridat_Click;
             // 
             // cmbFilterStitek
             // 
             cmbFilterStitek.ForeColor = Color.FromArgb(35, 35, 55);
-            cmbFilterStitek.Location = new Point(308, 22);
+            cmbFilterStitek.Location = new Point(304, 12);
             cmbFilterStitek.Name = "cmbFilterStitek";
             cmbFilterStitek.Size = new Size(140, 23);
             cmbFilterStitek.TabIndex = 2;
@@ -106,7 +104,7 @@
             lblStatus.AutoSize = true;
             lblStatus.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
             lblStatus.ForeColor = SystemColors.ControlLightLight;
-            lblStatus.Location = new Point(653, 68);
+            lblStatus.Location = new Point(271, 56);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(53, 20);
             lblStatus.TabIndex = 3;
@@ -115,7 +113,7 @@
             // cmbFilterUzivatel
             // 
             cmbFilterUzivatel.ForeColor = Color.FromArgb(35, 35, 55);
-            cmbFilterUzivatel.Location = new Point(162, 22);
+            cmbFilterUzivatel.Location = new Point(158, 12);
             cmbFilterUzivatel.Name = "cmbFilterUzivatel";
             cmbFilterUzivatel.Size = new Size(140, 23);
             cmbFilterUzivatel.TabIndex = 1;
@@ -126,7 +124,7 @@
             lblDatum.AutoSize = true;
             lblDatum.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
             lblDatum.ForeColor = SystemColors.ControlLightLight;
-            lblDatum.Location = new Point(454, 68);
+            lblDatum.Location = new Point(429, 56);
             lblDatum.Name = "lblDatum";
             lblDatum.Size = new Size(111, 20);
             lblDatum.TabIndex = 2;
@@ -135,7 +133,7 @@
             // cmbFilterStav
             // 
             cmbFilterStav.ForeColor = Color.FromArgb(35, 35, 55);
-            cmbFilterStav.Location = new Point(16, 22);
+            cmbFilterStav.Location = new Point(12, 12);
             cmbFilterStav.Name = "cmbFilterStav";
             cmbFilterStav.Size = new Size(140, 23);
             cmbFilterStav.TabIndex = 3;
@@ -146,23 +144,12 @@
             lblPopis.AutoSize = true;
             lblPopis.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
             lblPopis.ForeColor = SystemColors.ControlLightLight;
-            lblPopis.Location = new Point(162, 68);
+            lblPopis.Location = new Point(88, 56);
             lblPopis.Name = "lblPopis";
-            lblPopis.Size = new Size(47, 20);
+            lblPopis.Size = new Size(90, 20);
             lblPopis.TabIndex = 1;
-            lblPopis.Text = "Popis";
+            lblPopis.Text = "Popis úkolu";
             lblPopis.Click += lblPopis_Click;
-            // 
-            // lblNazev
-            // 
-            lblNazev.AutoSize = true;
-            lblNazev.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            lblNazev.ForeColor = SystemColors.ControlLightLight;
-            lblNazev.Location = new Point(33, 68);
-            lblNazev.Name = "lblNazev";
-            lblNazev.Size = new Size(41, 20);
-            lblNazev.TabIndex = 0;
-            lblNazev.Text = "Úkol";
             // 
             // flpUkoly
             // 
@@ -170,10 +157,10 @@
             flpUkoly.BackColor = Color.Transparent;
             flpUkoly.Dock = DockStyle.Fill;
             flpUkoly.FlowDirection = FlowDirection.TopDown;
-            flpUkoly.Location = new Point(0, 109);
+            flpUkoly.Location = new Point(0, 92);
             flpUkoly.Name = "flpUkoly";
             flpUkoly.Padding = new Padding(10);
-            flpUkoly.Size = new Size(900, 491);
+            flpUkoly.Size = new Size(900, 508);
             flpUkoly.TabIndex = 0;
             // 
             // Form1
@@ -205,7 +192,6 @@
         private Label lblStatus;
         private Label lblDatum;
         private Label lblPopis;
-        private Label lblNazev;
         public Button btnPridat;
     }
 }
