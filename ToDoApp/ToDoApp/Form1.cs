@@ -177,17 +177,17 @@ namespace ToDoApp
                 Font = new Font("Segoe UI", 9, FontStyle.Bold)
             };
 
-                // ✅ STATUS (barevný)
-                if (ukol.JeSplneno)
-                {
-                    lblStatus.Text = "✔ splněno";
-                    lblStatus.ForeColor = Color.LightGreen;
-                }
-                else
-                {
-                    lblStatus.Text = "❌ nesplněno";
-                    lblStatus.ForeColor = Color.Red;
-                }
+            // ✅ STATUS (barevný)
+            if (ukol.JeSplneno)
+            {
+                lblStatus.Text = "✔ splněno";
+                lblStatus.ForeColor = Color.LightGreen;
+            }
+            else
+            {
+                lblStatus.Text = "❌ nesplněno";
+                lblStatus.ForeColor = Color.Red;
+            }
 
             // datum splnění
             var lblDatum = new Label
@@ -220,15 +220,19 @@ namespace ToDoApp
             var btnUpravit = new Button
             {
                 Text = "✏",
-                BackColor = Color.MediumPurple,
-                ForeColor = Color.White,
+                BackColor = Color.Transparent,
+                ForeColor = Color.MediumPurple,
+                Font = new Font("Segoe UI", 12, FontStyle.Regular),
                 FlatStyle = FlatStyle.Flat,
                 Location = new Point(panel.Width - 110, 20),
-                Width = 40,
-                Height = 30
+                Width = 32,
+                Height = 32,
+                Cursor = Cursors.Hand
             };
 
             btnUpravit.FlatAppearance.BorderSize = 0;
+            btnUpravit.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnUpravit.FlatAppearance.MouseOverBackColor = Color.Transparent;
 
             btnUpravit.Click += (s, e) =>
             {
@@ -245,20 +249,34 @@ namespace ToDoApp
             var btnSmazat = new Button
             {
                 Text = "🗑",
-                BackColor = Color.IndianRed,
-                ForeColor = Color.White,
+                BackColor = Color.Transparent,
+                ForeColor = Color.IndianRed,
+                Font = new Font("Segoe UI", 12, FontStyle.Regular),
                 FlatStyle = FlatStyle.Flat,
                 Location = new Point(panel.Width - 60, 20),
-                Width = 40,
-                Height = 30
+                Width = 32,
+                Height = 32,
+                Cursor = Cursors.Hand
             };
 
             btnSmazat.FlatAppearance.BorderSize = 0;
+            btnSmazat.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            btnSmazat.FlatAppearance.MouseOverBackColor = Color.Transparent;
 
             btnSmazat.Click += (s, e) =>
             {
-                _vytvoreniUkolu.SmazatUkol(ukol.Id);
-                ObnovUI();
+                var result = MessageBox.Show(
+                    $"Opravdu chcete smazat úkol '{ukol.Nazev}'?\nTuto akci nelze vrátit zpět.",
+                    "Smazání úkolu",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning,
+                    MessageBoxDefaultButton.Button2);
+
+                if (result == DialogResult.Yes)
+                {
+                    _vytvoreniUkolu.SmazatUkol(ukol.Id);
+                    ObnovUI();
+                }
             };
 
 
@@ -366,6 +384,41 @@ namespace ToDoApp
             cmbFiltrStav.SelectedIndex = 0;
 
             ObnovUI(_data.Ukoly);
+        }
+
+        private void HledatUkoly()
+        {
+            string hledanyText = txtHledat.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(hledanyText))
+            {
+                ObnovUI();
+                return;
+            }
+
+            var vysledek = _data.Ukoly
+                .Where(u => u.Nazev.Contains(
+                    hledanyText,
+                    StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            ObnovUI(vysledek);
+        }
+
+        private void btnHledat_Click(object sender, EventArgs e)
+        {
+            HledatUkoly();
+        }
+
+        private void txtHledat_TextChanged(object sender, EventArgs e)
+        {
+            HledatUkoly();
+        }
+
+        private void btnZrusitHledani_Click(object sender, EventArgs e)
+        {
+            txtHledat.Text = "";
+            ObnovUI();
         }
     }
 }

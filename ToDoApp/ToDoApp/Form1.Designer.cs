@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             topPanel = new Panel();
+            btnZrusitHledani = new Button();
+            txtHledat = new TextBox();
             btnVymazatFiltry = new Button();
             btnFiltrovat = new Button();
             btnPridat = new Button();
@@ -39,12 +41,16 @@
             cmbFiltrStav = new ComboBox();
             lblPopis = new Label();
             flpUkoly = new FlowLayoutPanel();
+            lblHledat = new Label();
             topPanel.SuspendLayout();
             SuspendLayout();
             // 
             // topPanel
             // 
             topPanel.BackColor = Color.Purple;
+            topPanel.Controls.Add(lblHledat);
+            topPanel.Controls.Add(btnZrusitHledani);
+            topPanel.Controls.Add(txtHledat);
             topPanel.Controls.Add(btnVymazatFiltry);
             topPanel.Controls.Add(btnFiltrovat);
             topPanel.Controls.Add(btnPridat);
@@ -61,18 +67,42 @@
             topPanel.TabIndex = 1;
             topPanel.Paint += topPanel_Paint;
             // 
+            // btnZrusitHledani
+            // 
+            btnZrusitHledani.BackColor = Color.DarkViolet;
+            btnZrusitHledani.FlatAppearance.BorderSize = 0;
+            btnZrusitHledani.FlatStyle = FlatStyle.Flat;
+            btnZrusitHledani.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold);
+            btnZrusitHledani.ForeColor = Color.White;
+            btnZrusitHledani.Location = new Point(176, 13);
+            btnZrusitHledani.Name = "btnZrusitHledani";
+            btnZrusitHledani.Size = new Size(30, 30);
+            btnZrusitHledani.TabIndex = 9;
+            btnZrusitHledani.Text = "↻";
+            btnZrusitHledani.UseVisualStyleBackColor = false;
+            btnZrusitHledani.Click += btnZrusitHledani_Click;
+            // 
+            // txtHledat
+            // 
+            txtHledat.Location = new Point(50, 13);
+            txtHledat.Name = "txtHledat";
+            txtHledat.PlaceholderText = "hledat úkol...";
+            txtHledat.Size = new Size(120, 23);
+            txtHledat.TabIndex = 7;
+            txtHledat.TextChanged += txtHledat_TextChanged;
+            // 
             // btnVymazatFiltry
             // 
             btnVymazatFiltry.BackColor = Color.DarkViolet;
             btnVymazatFiltry.FlatAppearance.BorderSize = 0;
             btnVymazatFiltry.FlatStyle = FlatStyle.Flat;
-            btnVymazatFiltry.Font = new Font("Segoe UI Black", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            btnVymazatFiltry.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold);
             btnVymazatFiltry.ForeColor = Color.White;
             btnVymazatFiltry.Location = new Point(742, 11);
             btnVymazatFiltry.Name = "btnVymazatFiltry";
             btnVymazatFiltry.Size = new Size(30, 30);
             btnVymazatFiltry.TabIndex = 5;
-            btnVymazatFiltry.Text = "↺";
+            btnVymazatFiltry.Text = "↻";
             btnVymazatFiltry.UseVisualStyleBackColor = false;
             btnVymazatFiltry.Click += btnVymazatFiltry_Click;
             // 
@@ -180,6 +210,18 @@
             flpUkoly.Size = new Size(900, 508);
             flpUkoly.TabIndex = 0;
             // 
+            // lblHledat
+            // 
+            lblHledat.AutoSize = true;
+            lblHledat.BackColor = Color.Transparent;
+            lblHledat.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            lblHledat.ForeColor = SystemColors.ControlLightLight;
+            lblHledat.Location = new Point(20, 14);
+            lblHledat.Name = "lblHledat";
+            lblHledat.Size = new Size(27, 17);
+            lblHledat.TabIndex = 10;
+            lblHledat.Text = "🔍";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -211,5 +253,8 @@
         private Label lblPopis;
         public Button btnPridat;
         private Button btnVymazatFiltry;
+        private TextBox txtHledat;
+        private Button btnZrusitHledani;
+        private Label lblHledat;
     }
 }
