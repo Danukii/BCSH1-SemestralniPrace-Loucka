@@ -286,8 +286,15 @@ namespace ToDoApp
             panel.Controls.Add(lblPopis);
             panel.Controls.Add(lblStatus);
             panel.Controls.Add(lblDatum);
-            panel.Controls.Add(progressBar);
-            panel.Controls.Add(lblProgress);
+
+            if (ukol.ZobrazitProgressBar) {
+                panel.Controls.Add(progressBar);
+            }
+
+            if (ukol.ZobrazitProcenta) {
+                panel.Controls.Add(lblProgress);
+            }
+
             panel.Controls.Add(btnUpravit);
             panel.Controls.Add(btnSmazat);
 

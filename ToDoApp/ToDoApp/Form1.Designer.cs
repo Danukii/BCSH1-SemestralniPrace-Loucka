@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             topPanel = new Panel();
+            lblHledat = new Label();
             btnZrusitHledani = new Button();
             txtHledat = new TextBox();
             btnVymazatFiltry = new Button();
@@ -41,7 +42,6 @@
             cmbFiltrStav = new ComboBox();
             lblPopis = new Label();
             flpUkoly = new FlowLayoutPanel();
-            lblHledat = new Label();
             topPanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -67,6 +67,18 @@
             topPanel.TabIndex = 1;
             topPanel.Paint += topPanel_Paint;
             // 
+            // lblHledat
+            // 
+            lblHledat.AutoSize = true;
+            lblHledat.BackColor = Color.Transparent;
+            lblHledat.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            lblHledat.ForeColor = SystemColors.ControlLightLight;
+            lblHledat.Location = new Point(20, 14);
+            lblHledat.Name = "lblHledat";
+            lblHledat.Size = new Size(27, 17);
+            lblHledat.TabIndex = 10;
+            lblHledat.Text = "🔍";
+            // 
             // btnZrusitHledani
             // 
             btnZrusitHledani.BackColor = Color.DarkViolet;
@@ -77,7 +89,7 @@
             btnZrusitHledani.Location = new Point(176, 13);
             btnZrusitHledani.Name = "btnZrusitHledani";
             btnZrusitHledani.Size = new Size(30, 30);
-            btnZrusitHledani.TabIndex = 9;
+            btnZrusitHledani.TabIndex = 2;
             btnZrusitHledani.Text = "↻";
             btnZrusitHledani.UseVisualStyleBackColor = false;
             btnZrusitHledani.Click += btnZrusitHledani_Click;
@@ -88,11 +100,12 @@
             txtHledat.Name = "txtHledat";
             txtHledat.PlaceholderText = "hledat úkol...";
             txtHledat.Size = new Size(120, 23);
-            txtHledat.TabIndex = 7;
+            txtHledat.TabIndex = 1;
             txtHledat.TextChanged += txtHledat_TextChanged;
             // 
             // btnVymazatFiltry
             // 
+            btnVymazatFiltry.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnVymazatFiltry.BackColor = Color.DarkViolet;
             btnVymazatFiltry.FlatAppearance.BorderSize = 0;
             btnVymazatFiltry.FlatStyle = FlatStyle.Flat;
@@ -101,22 +114,23 @@
             btnVymazatFiltry.Location = new Point(742, 11);
             btnVymazatFiltry.Name = "btnVymazatFiltry";
             btnVymazatFiltry.Size = new Size(30, 30);
-            btnVymazatFiltry.TabIndex = 5;
+            btnVymazatFiltry.TabIndex = 6;
             btnVymazatFiltry.Text = "↻";
             btnVymazatFiltry.UseVisualStyleBackColor = false;
             btnVymazatFiltry.Click += btnVymazatFiltry_Click;
             // 
             // btnFiltrovat
             // 
+            btnFiltrovat.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnFiltrovat.BackColor = Color.DarkViolet;
             btnFiltrovat.FlatAppearance.BorderSize = 0;
             btnFiltrovat.FlatStyle = FlatStyle.Flat;
             btnFiltrovat.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
             btnFiltrovat.ForeColor = Color.White;
-            btnFiltrovat.Location = new Point(778, 12);
+            btnFiltrovat.Location = new Point(778, 11);
             btnFiltrovat.Name = "btnFiltrovat";
             btnFiltrovat.Size = new Size(100, 30);
-            btnFiltrovat.TabIndex = 4;
+            btnFiltrovat.TabIndex = 7;
             btnFiltrovat.Text = "Filtrovat";
             btnFiltrovat.UseVisualStyleBackColor = false;
             btnFiltrovat.Click += btnFiltrovat_Click;
@@ -139,11 +153,12 @@
             // 
             // cmbFiltrStitek
             // 
+            cmbFiltrStitek.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             cmbFiltrStitek.ForeColor = Color.FromArgb(35, 35, 55);
             cmbFiltrStitek.Location = new Point(596, 11);
             cmbFiltrStitek.Name = "cmbFiltrStitek";
             cmbFiltrStitek.Size = new Size(140, 23);
-            cmbFiltrStitek.TabIndex = 2;
+            cmbFiltrStitek.TabIndex = 5;
             cmbFiltrStitek.Text = "Štítky";
             // 
             // lblStatus
@@ -159,11 +174,12 @@
             // 
             // cmbFiltrUzivatel
             // 
+            cmbFiltrUzivatel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             cmbFiltrUzivatel.ForeColor = Color.FromArgb(35, 35, 55);
             cmbFiltrUzivatel.Location = new Point(450, 11);
             cmbFiltrUzivatel.Name = "cmbFiltrUzivatel";
             cmbFiltrUzivatel.Size = new Size(140, 23);
-            cmbFiltrUzivatel.TabIndex = 1;
+            cmbFiltrUzivatel.TabIndex = 4;
             cmbFiltrUzivatel.Text = "Uživatel";
             // 
             // lblDatum
@@ -179,8 +195,9 @@
             // 
             // cmbFiltrStav
             // 
+            cmbFiltrStav.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             cmbFiltrStav.ForeColor = Color.FromArgb(35, 35, 55);
-            cmbFiltrStav.Location = new Point(304, 12);
+            cmbFiltrStav.Location = new Point(304, 11);
             cmbFiltrStav.Name = "cmbFiltrStav";
             cmbFiltrStav.Size = new Size(140, 23);
             cmbFiltrStav.TabIndex = 3;
@@ -209,18 +226,7 @@
             flpUkoly.Padding = new Padding(10);
             flpUkoly.Size = new Size(900, 508);
             flpUkoly.TabIndex = 0;
-            // 
-            // lblHledat
-            // 
-            lblHledat.AutoSize = true;
-            lblHledat.BackColor = Color.Transparent;
-            lblHledat.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            lblHledat.ForeColor = SystemColors.ControlLightLight;
-            lblHledat.Location = new Point(20, 14);
-            lblHledat.Name = "lblHledat";
-            lblHledat.Size = new Size(27, 17);
-            lblHledat.TabIndex = 10;
-            lblHledat.Text = "🔍";
+            flpUkoly.WrapContents = false;
             // 
             // Form1
             // 
@@ -245,8 +251,6 @@
         private ComboBox cmbFiltrStitek;
         private ComboBox cmbFiltrStav;
 
-        private Button btnFiltrovat;
-
         private FlowLayoutPanel flpUkoly;
         private Label lblStatus;
         private Label lblDatum;
@@ -256,5 +260,6 @@
         private TextBox txtHledat;
         private Button btnZrusitHledani;
         private Label lblHledat;
+        public Button btnFiltrovat;
     }
 }

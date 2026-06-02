@@ -56,7 +56,7 @@ namespace ToDoApp
 
             chlbStitky.DisplayMember = "Nazev";
 
-            // pokud upravujeme existující úkol
+            // upravujeme existující úkol
             if (ukol != null)
             {
                 Ukol = ukol;
@@ -81,6 +81,9 @@ namespace ToDoApp
                     var label = (Stitek)chlbStitky.Items[i];
                     chlbStitky.SetItemChecked(i, ukol.StitekId.Contains(label.Id));
                 }
+
+                chbProgressBar.Checked = ukol.ZobrazitProgressBar;
+                chbProcenta.Checked = ukol.ZobrazitProcenta;
             }
         }
 
@@ -100,6 +103,8 @@ namespace ToDoApp
             Ukol.JeSplneno = chbSplneno.Checked;
             Ukol.DatumSplneni = dtpDatum.Value;
             Ukol.Progress = tbProgress.Value;
+            Ukol.ZobrazitProgressBar = chbProgressBar.Checked;
+            Ukol.ZobrazitProcenta = chbProcenta.Checked;
 
             // uživatel
             if (cmbUzivatel.SelectedItem != null)

@@ -51,6 +51,8 @@
             btnSmazatStitek = new Button();
             tbProgress = new TrackBar();
             lblProgress = new Label();
+            chbProgressBar = new CheckBox();
+            chbProcenta = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)tbProgress).BeginInit();
             SuspendLayout();
             // 
@@ -110,7 +112,7 @@
             // chbSplneno
             // 
             chbSplneno.AutoSize = true;
-            chbSplneno.Location = new Point(346, 276);
+            chbSplneno.Location = new Point(455, 248);
             chbSplneno.Name = "chbSplneno";
             chbSplneno.Size = new Size(68, 19);
             chbSplneno.TabIndex = 5;
@@ -309,12 +311,34 @@
             lblProgress.TabIndex = 22;
             lblProgress.Text = "0 %";
             // 
+            // chbProgressBar
+            // 
+            chbProgressBar.AutoSize = true;
+            chbProgressBar.Location = new Point(248, 272);
+            chbProgressBar.Name = "chbProgressBar";
+            chbProgressBar.Size = new Size(135, 19);
+            chbProgressBar.TabIndex = 23;
+            chbProgressBar.Text = "zobrazit progress bar";
+            chbProgressBar.UseVisualStyleBackColor = true;
+            // 
+            // chbProcenta
+            // 
+            chbProcenta.AutoSize = true;
+            chbProcenta.Location = new Point(248, 297);
+            chbProcenta.Name = "chbProcenta";
+            chbProcenta.Size = new Size(117, 19);
+            chbProcenta.TabIndex = 24;
+            chbProcenta.Text = "zobrazit procenta";
+            chbProcenta.UseVisualStyleBackColor = true;
+            // 
             // FormUpravitUkol
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(35, 35, 55);
             ClientSize = new Size(657, 347);
+            Controls.Add(chbProcenta);
+            Controls.Add(chbProgressBar);
             Controls.Add(lblProgress);
             Controls.Add(tbProgress);
             Controls.Add(btnSmazatStitek);
@@ -373,5 +397,7 @@
         private Button btnSmazatStitek;
         private TrackBar tbProgress;
         private Label lblProgress;
+        private CheckBox chbProgressBar;
+        private CheckBox chbProcenta;
     }
 }

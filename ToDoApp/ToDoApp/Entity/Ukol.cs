@@ -15,7 +15,9 @@ namespace ToDoApp.Entity
         public DateTime? DatumSplneni { get; set; }
         public bool JeSplneno { get; set; }
         public string Stav { get; set; } // "hotovo", "nehotovo"
-        public int Progress { get; set; } // 0-100, pro zobrazení progress baru
+        public int Progress { get; set; } // 0-100
+        public bool ZobrazitProgressBar { get; set; } = true;
+        public bool ZobrazitProcenta { get; set; } = true;
 
         public int? UzivatelId { get; set; }
         public List<int> StitekId { get; set; } = new();
