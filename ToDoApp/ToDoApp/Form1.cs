@@ -45,21 +45,36 @@ namespace ToDoApp
             _vytvoreniUkolu = new VytvoreniUkolu(_data);
 
 
-            // naplnění uživatelů do ComboBoxu pro filtrování
-            cmbFilterUzivatel.DataSource = _data.Uzivatele.ToList();
-            cmbFilterUzivatel.DisplayMember = "Jmeno";
-            cmbFilterUzivatel.ValueMember = "Id";
-            cmbFilterUzivatel.SelectedIndex = -1;
+            // filtr uživatelů
+            cmbFiltrUzivatel.Items.Add("Všichni uživatelé");
 
-            // naplnění štítků pro filtraci
-            cmbFilterStitek.DataSource = _data.Stitky.ToList();
-            cmbFilterStitek.DisplayMember = "Nazev";
-            cmbFilterStitek.ValueMember = "Id";
-            cmbFilterStitek.SelectedIndex = -1;
+            foreach (var user in _data.Uzivatele)
+            {
+                cmbFiltrUzivatel.Items.Add(user);
+            }
+
+            cmbFiltrUzivatel.DisplayMember = "Jmeno";
+
+            cmbFiltrUzivatel.SelectedIndex = 0;
+
+            // filtr štítků
+            cmbFiltrStitek.Items.Add("Všechny štítky");
+
+            foreach (var label in _data.Stitky)
+            {
+                cmbFiltrStitek.Items.Add(label);
+            }
+
+            cmbFiltrStitek.DisplayMember = "Nazev";
+
+            cmbFiltrStitek.SelectedIndex = 0;
 
             // naplnění stavu pro filtraci
-            cmbFilterStav.Items.AddRange(new[] { "všechny úkoly", "splněno", "nesplněno" });
-            cmbFilterStav.SelectedIndex = 0;
+            cmbFiltrStav.Items.AddRange(new[] { "vše", "splněno", "nesplněno" });
+            cmbFiltrStav.SelectedIndex = 0;
+
+            // obnovení filtrů (pro případ, že by se načetly nové položky)
+            ObnovFiltry();
 
             // první vykreslení
             ObnovUI();
@@ -69,7 +84,7 @@ namespace ToDoApp
         // ============= UI =============
 
         // obnovení zobrazení úkolů (po změně dat) - znovu projít všechny úkoly a vytvořit pro ně „kartičky“
-        private void ObnovUI(IEnumerable<Ukol> zdroj = null)
+        private void ObnovUI(IEnumerable<Ukol>? zdroj = null)
         {
             var data = zdroj ?? _data.Ukoly;
 
@@ -82,13 +97,39 @@ namespace ToDoApp
             flpUkoly.ResumeLayout();
         }
 
+        // obnovení filtrů (po změně uživatelů/štítků) - znovu naplnit ComboBoxy pro filtrování
+        private void ObnovFiltry()
+        {
+            // Uživatelé
+            cmbFiltrUzivatel.Items.Clear();
+            cmbFiltrUzivatel.Items.Add("Všichni uživatelé");
+
+            foreach (var user in _data.Uzivatele)
+            {
+                cmbFiltrUzivatel.Items.Add(user);
+            }
+
+            cmbFiltrUzivatel.DisplayMember = "Jmeno";
+
+            // Štítky
+            cmbFiltrStitek.Items.Clear();
+            cmbFiltrStitek.Items.Add("Všechny štítky");
+
+            foreach (var label in _data.Stitky)
+            {
+                cmbFiltrStitek.Items.Add(label);
+            }
+
+            cmbFiltrStitek.DisplayMember = "Nazev";
+        }
+
         // zobrazení úkolů v panelu (FlowLayoutPanel) - jak vytvořit „kartičku úkolu“
         private Panel VytvorUkolPanel(Ukol ukol)
         {
             var panel = new Panel
             {
                 Width = flpUkoly.ClientSize.Width - 30,
-                Height = 90,
+                Height = 70,
                 BackColor = Color.FromArgb(35, 35, 55),
                 Margin = new Padding(8),
                 Padding = new Padding(10)
@@ -124,36 +165,54 @@ namespace ToDoApp
                 Text = ukol.Popis, //ukol.Popis.Split('\n').FirstOrDefault() ?? ""
                 ForeColor = Color.LightGray,
                 Font = new Font("Segoe UI", 9, FontStyle.Regular),
-                Location = new Point(50, 10),
+                Location = new Point(40, 45),
                 AutoSize = true
             };
 
             // stav úkolu (splněno/nedokončeno/nehotovo) - barevný
             var lblStatus = new Label
             {
-                Location = new Point(250, 22),
+                Location = new Point(250, 25),
                 AutoSize = true,
                 Font = new Font("Segoe UI", 9, FontStyle.Bold)
             };
 
-            // ✅ STATUS (barevný)
-            if (ukol.JeSplneno)
-            {
-                lblStatus.Text = "✔ splněno";
-                lblStatus.ForeColor = Color.LightGreen;
-            }
-            else
-            {
-                lblStatus.Text = "❌ nehotovo";
-                lblStatus.ForeColor = Color.Red;
-            }
+                // ✅ STATUS (barevný)
+                if (ukol.JeSplneno)
+                {
+                    lblStatus.Text = "✔ splněno";
+                    lblStatus.ForeColor = Color.LightGreen;
+                }
+                else
+                {
+                    lblStatus.Text = "❌ nesplněno";
+                    lblStatus.ForeColor = Color.Red;
+                }
 
             // datum splnění
             var lblDatum = new Label
             {
-                Text = ukol.DatumSplneni.HasValue? ukol.DatumSplneni.Value.ToString("dd.MM.yyyy"): "",
+                Text = ukol.DatumSplneni.HasValue ? ukol.DatumSplneni.Value.ToString("dd.MM.yyyy") : "",
                 ForeColor = Color.Gray,
-                Location = new Point(40, 50),
+                Location = new Point(400, 25),
+                AutoSize = true
+            };
+
+            // progres úkolu (pokud není splněno) - zobrazení v procentech
+            var progressBar = new ProgressBar
+            {
+                Location = new Point(540, 25),
+                Width = 100,
+                Height = 15,
+                Value = ukol.Progress
+            };
+
+            // label %
+            var lblProgress = new Label
+            {
+                Text = ukol.Progress + "%",
+                ForeColor = Color.White,
+                Location = new Point(650, 25),
                 AutoSize = true
             };
 
@@ -164,8 +223,9 @@ namespace ToDoApp
                 BackColor = Color.MediumPurple,
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
-                Location = new Point(panel.Width - 110, 18),
-                Width = 40
+                Location = new Point(panel.Width - 110, 20),
+                Width = 40,
+                Height = 30
             };
 
             btnUpravit.FlatAppearance.BorderSize = 0;
@@ -188,8 +248,9 @@ namespace ToDoApp
                 BackColor = Color.IndianRed,
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
-                Location = new Point(panel.Width - 60, 18),
-                Width = 40
+                Location = new Point(panel.Width - 60, 20),
+                Width = 40,
+                Height = 30
             };
 
             btnSmazat.FlatAppearance.BorderSize = 0;
@@ -207,6 +268,8 @@ namespace ToDoApp
             panel.Controls.Add(lblPopis);
             panel.Controls.Add(lblStatus);
             panel.Controls.Add(lblDatum);
+            panel.Controls.Add(progressBar);
+            panel.Controls.Add(lblProgress);
             panel.Controls.Add(btnUpravit);
             panel.Controls.Add(btnSmazat);
 
@@ -225,21 +288,26 @@ namespace ToDoApp
             {
                 _vytvoreniUkolu.PridatUkol(form.Ukol);
                 ObnovUI();
+                ObnovFiltry();
             }
         }
 
         // filtrování
         private void btnFiltrovat_Click(object sender, EventArgs e)
         {
-            int? uzivatelId = cmbFilterUzivatel.SelectedIndex >= 0
-                ? (int?)cmbFilterUzivatel.SelectedValue
-                : null;
+            int? uzivatelId = null;
+            if (cmbFiltrUzivatel.SelectedItem is Uzivatel user)
+            {
+                uzivatelId = user.Id;
+            }
 
-            int? stitekId = cmbFilterStitek.SelectedIndex >= 0
-                ? (int?)cmbFilterStitek.SelectedValue
-                : null;
+            int? stitekId = null;
+            if (cmbFiltrStitek.SelectedItem is Stitek stitek)
+            {
+                stitekId = stitek.Id;
+            }
 
-            string stav = cmbFilterStav.SelectedItem?.ToString();
+            string? stav = cmbFiltrStav.SelectedItem?.ToString();
 
             var filtered = _data.Ukoly.AsEnumerable();
 
@@ -250,10 +318,19 @@ namespace ToDoApp
                 filtered = filtered.Where(u => u.StitekId.Contains(stitekId.Value));
 
             if (stav == "splněno")
+            {
                 filtered = filtered.Where(u => u.JeSplneno);
-
-            if (stav == "nedokončeno")
+            }
+            else if (stav == "nesplněno")
+            {
                 filtered = filtered.Where(u => !u.JeSplneno);
+            }
+            else if (stav == "částečně hotové")
+            {
+                filtered = filtered.Where(u =>
+                    u.Progress > 0 &&
+                    u.Progress < 100);
+            }
 
             ObnovUI(filtered.ToList());
         }
@@ -264,6 +341,8 @@ namespace ToDoApp
 
         private void btnUpravit_Click(object sender, EventArgs e)
         {
+            ObnovUI();
+            ObnovFiltry();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -278,6 +357,15 @@ namespace ToDoApp
         private void lblPopis_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnVymazatFiltry_Click(object sender, EventArgs e)
+        {
+            cmbFiltrUzivatel.SelectedIndex = 0;
+            cmbFiltrStitek.SelectedIndex = 0;
+            cmbFiltrStav.SelectedIndex = 0;
+
+            ObnovUI(_data.Ukoly);
         }
     }
 }

@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             topPanel = new Panel();
+            btnVymazatFiltry = new Button();
             btnFiltrovat = new Button();
             btnPridat = new Button();
-            cmbFilterStitek = new ComboBox();
+            cmbFiltrStitek = new ComboBox();
             lblStatus = new Label();
-            cmbFilterUzivatel = new ComboBox();
+            cmbFiltrUzivatel = new ComboBox();
             lblDatum = new Label();
-            cmbFilterStav = new ComboBox();
+            cmbFiltrStav = new ComboBox();
             lblPopis = new Label();
             flpUkoly = new FlowLayoutPanel();
             topPanel.SuspendLayout();
@@ -44,13 +45,14 @@
             // topPanel
             // 
             topPanel.BackColor = Color.Purple;
+            topPanel.Controls.Add(btnVymazatFiltry);
             topPanel.Controls.Add(btnFiltrovat);
             topPanel.Controls.Add(btnPridat);
-            topPanel.Controls.Add(cmbFilterStitek);
+            topPanel.Controls.Add(cmbFiltrStitek);
             topPanel.Controls.Add(lblStatus);
-            topPanel.Controls.Add(cmbFilterUzivatel);
+            topPanel.Controls.Add(cmbFiltrUzivatel);
             topPanel.Controls.Add(lblDatum);
-            topPanel.Controls.Add(cmbFilterStav);
+            topPanel.Controls.Add(cmbFiltrStav);
             topPanel.Controls.Add(lblPopis);
             topPanel.Dock = DockStyle.Top;
             topPanel.Location = new Point(0, 0);
@@ -59,6 +61,21 @@
             topPanel.TabIndex = 1;
             topPanel.Paint += topPanel_Paint;
             // 
+            // btnVymazatFiltry
+            // 
+            btnVymazatFiltry.BackColor = Color.DarkViolet;
+            btnVymazatFiltry.FlatAppearance.BorderSize = 0;
+            btnVymazatFiltry.FlatStyle = FlatStyle.Flat;
+            btnVymazatFiltry.Font = new Font("Segoe UI Black", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            btnVymazatFiltry.ForeColor = Color.White;
+            btnVymazatFiltry.Location = new Point(742, 11);
+            btnVymazatFiltry.Name = "btnVymazatFiltry";
+            btnVymazatFiltry.Size = new Size(30, 30);
+            btnVymazatFiltry.TabIndex = 5;
+            btnVymazatFiltry.Text = "↺";
+            btnVymazatFiltry.UseVisualStyleBackColor = false;
+            btnVymazatFiltry.Click += btnVymazatFiltry_Click;
+            // 
             // btnFiltrovat
             // 
             btnFiltrovat.BackColor = Color.DarkViolet;
@@ -66,7 +83,7 @@
             btnFiltrovat.FlatStyle = FlatStyle.Flat;
             btnFiltrovat.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
             btnFiltrovat.ForeColor = Color.White;
-            btnFiltrovat.Location = new Point(450, 12);
+            btnFiltrovat.Location = new Point(778, 12);
             btnFiltrovat.Name = "btnFiltrovat";
             btnFiltrovat.Size = new Size(100, 30);
             btnFiltrovat.TabIndex = 4;
@@ -82,7 +99,7 @@
             btnPridat.FlatStyle = FlatStyle.Flat;
             btnPridat.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
             btnPridat.ForeColor = Color.White;
-            btnPridat.Location = new Point(778, 46);
+            btnPridat.Location = new Point(778, 51);
             btnPridat.Name = "btnPridat";
             btnPridat.Size = new Size(100, 30);
             btnPridat.TabIndex = 0;
@@ -90,61 +107,61 @@
             btnPridat.UseVisualStyleBackColor = false;
             btnPridat.Click += btnPridat_Click;
             // 
-            // cmbFilterStitek
+            // cmbFiltrStitek
             // 
-            cmbFilterStitek.ForeColor = Color.FromArgb(35, 35, 55);
-            cmbFilterStitek.Location = new Point(304, 12);
-            cmbFilterStitek.Name = "cmbFilterStitek";
-            cmbFilterStitek.Size = new Size(140, 23);
-            cmbFilterStitek.TabIndex = 2;
-            cmbFilterStitek.Text = "Štítky";
+            cmbFiltrStitek.ForeColor = Color.FromArgb(35, 35, 55);
+            cmbFiltrStitek.Location = new Point(596, 11);
+            cmbFiltrStitek.Name = "cmbFiltrStitek";
+            cmbFiltrStitek.Size = new Size(140, 23);
+            cmbFiltrStitek.TabIndex = 2;
+            cmbFiltrStitek.Text = "Štítky";
             // 
             // lblStatus
             // 
             lblStatus.AutoSize = true;
             lblStatus.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
             lblStatus.ForeColor = SystemColors.ControlLightLight;
-            lblStatus.Location = new Point(271, 56);
+            lblStatus.Location = new Point(265, 56);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(53, 20);
             lblStatus.TabIndex = 3;
             lblStatus.Text = "Status";
             // 
-            // cmbFilterUzivatel
+            // cmbFiltrUzivatel
             // 
-            cmbFilterUzivatel.ForeColor = Color.FromArgb(35, 35, 55);
-            cmbFilterUzivatel.Location = new Point(158, 12);
-            cmbFilterUzivatel.Name = "cmbFilterUzivatel";
-            cmbFilterUzivatel.Size = new Size(140, 23);
-            cmbFilterUzivatel.TabIndex = 1;
-            cmbFilterUzivatel.Text = "Uživatel";
+            cmbFiltrUzivatel.ForeColor = Color.FromArgb(35, 35, 55);
+            cmbFiltrUzivatel.Location = new Point(450, 11);
+            cmbFiltrUzivatel.Name = "cmbFiltrUzivatel";
+            cmbFiltrUzivatel.Size = new Size(140, 23);
+            cmbFiltrUzivatel.TabIndex = 1;
+            cmbFiltrUzivatel.Text = "Uživatel";
             // 
             // lblDatum
             // 
             lblDatum.AutoSize = true;
             lblDatum.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
             lblDatum.ForeColor = SystemColors.ControlLightLight;
-            lblDatum.Location = new Point(429, 56);
+            lblDatum.Location = new Point(415, 56);
             lblDatum.Name = "lblDatum";
             lblDatum.Size = new Size(111, 20);
             lblDatum.TabIndex = 2;
             lblDatum.Text = "Datum splnění";
             // 
-            // cmbFilterStav
+            // cmbFiltrStav
             // 
-            cmbFilterStav.ForeColor = Color.FromArgb(35, 35, 55);
-            cmbFilterStav.Location = new Point(12, 12);
-            cmbFilterStav.Name = "cmbFilterStav";
-            cmbFilterStav.Size = new Size(140, 23);
-            cmbFilterStav.TabIndex = 3;
-            cmbFilterStav.Text = "Stav";
+            cmbFiltrStav.ForeColor = Color.FromArgb(35, 35, 55);
+            cmbFiltrStav.Location = new Point(304, 12);
+            cmbFiltrStav.Name = "cmbFiltrStav";
+            cmbFiltrStav.Size = new Size(140, 23);
+            cmbFiltrStav.TabIndex = 3;
+            cmbFiltrStav.Text = "Stav";
             // 
             // lblPopis
             // 
             lblPopis.AutoSize = true;
             lblPopis.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
             lblPopis.ForeColor = SystemColors.ControlLightLight;
-            lblPopis.Location = new Point(88, 56);
+            lblPopis.Location = new Point(60, 56);
             lblPopis.Name = "lblPopis";
             lblPopis.Size = new Size(90, 20);
             lblPopis.TabIndex = 1;
@@ -182,9 +199,9 @@
 
         private Panel topPanel;
 
-        private ComboBox cmbFilterUzivatel;
-        private ComboBox cmbFilterStitek;
-        private ComboBox cmbFilterStav;
+        private ComboBox cmbFiltrUzivatel;
+        private ComboBox cmbFiltrStitek;
+        private ComboBox cmbFiltrStav;
 
         private Button btnFiltrovat;
 
@@ -193,5 +210,6 @@
         private Label lblDatum;
         private Label lblPopis;
         public Button btnPridat;
+        private Button btnVymazatFiltry;
     }
 }

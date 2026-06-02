@@ -29,9 +29,17 @@ namespace ToDoApp
         public FormUpravitUkol(
             List<Uzivatel> uzivatele,
             List<Stitek> stitky,
-            Ukol ukol = null)
+            Ukol? ukol = null)
         {
             InitializeComponent();
+
+            if (ukol == null) {
+                Text = "Přidat úkol";
+                btnOk.Text = "Přidat";
+            }else{
+                Text = "Upravit úkol";
+                btnOk.Text = "Uložit";
+            }
 
             _uzivatele = uzivatele;
             _stitky = stitky;
@@ -63,6 +71,10 @@ namespace ToDoApp
                 if (ukol.UzivatelId.HasValue)
                     cmbUzivatel.SelectedValue = ukol.UzivatelId.Value;
 
+                // progres
+                tbProgress.Value = ukol.Progress;
+                lblProgress.Text = ukol.Progress + "%";
+
                 // označení štítků
                 for (int i = 0; i < chlbStitky.Items.Count; i++)
                 {
@@ -87,10 +99,11 @@ namespace ToDoApp
             Ukol.Popis = txtPopis.Text;
             Ukol.JeSplneno = chbSplneno.Checked;
             Ukol.DatumSplneni = dtpDatum.Value;
+            Ukol.Progress = tbProgress.Value;
 
             // uživatel
             if (cmbUzivatel.SelectedItem != null)
-                Ukol.UzivatelId = (int)cmbUzivatel.SelectedValue;
+                Ukol.UzivatelId = (int?)cmbUzivatel.SelectedValue;
             else
                 Ukol.UzivatelId = null;
 
@@ -222,6 +235,68 @@ namespace ToDoApp
             chlbStitky.DisplayMember = "Nazev";
 
             txtNovyStitek.Clear();
+        }
+
+        private void dtpDatum_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        // mazání uživatele
+        private void btnSmazatUzivatele_Click(object sender, EventArgs e)
+        {
+            if (cmbUzivatel.SelectedItem == null)
+                return;
+
+            var user = (Uzivatel)cmbUzivatel.SelectedItem;
+
+            var result = MessageBox.Show(
+                $"Smazat uživatele {user.Jmeno}?",
+                "Potvrzení",
+                MessageBoxButtons.YesNo);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            _uzivatele.Remove(user);
+
+            cmbUzivatel.DataSource = null;
+            cmbUzivatel.DataSource = _uzivatele;
+            cmbUzivatel.DisplayMember = "Jmeno";
+            cmbUzivatel.ValueMember = "Id";
+        }
+
+        // mazání štítku
+        private void btnSmazatStitek_Click(object sender, EventArgs e)
+        {
+            if (chlbStitky.SelectedItem == null)
+                return;
+
+            var label = (Stitek)chlbStitky.SelectedItem;
+
+            var result = MessageBox.Show(
+                $"Smazat štítek {label.Nazev}?",
+                "Potvrzení",
+                MessageBoxButtons.YesNo);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            _stitky.Remove(label);
+
+            chlbStitky.Items.Clear();
+
+            foreach (var l in _stitky)
+            {
+                chlbStitky.Items.Add(l);
+            }
+
+            chlbStitky.DisplayMember = "Nazev";
+        }
+
+        private void tbProgress_Scroll(object sender, EventArgs e)
+        {
+            lblProgress.Text = tbProgress.Value + "%";
         }
     }
 }
