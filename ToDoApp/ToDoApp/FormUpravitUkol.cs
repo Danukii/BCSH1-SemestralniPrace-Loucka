@@ -33,10 +33,13 @@ namespace ToDoApp
         {
             InitializeComponent();
 
-            if (ukol == null) {
+            if (ukol == null)
+            {
                 Text = "Přidat úkol";
                 btnOk.Text = "Přidat";
-            }else{
+            }
+            else
+            {
                 Text = "Upravit úkol";
                 btnOk.Text = "Uložit";
             }
@@ -87,7 +90,7 @@ namespace ToDoApp
             }
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void btnOk_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtNazev.Text))
             {
@@ -303,5 +306,12 @@ namespace ToDoApp
         {
             lblProgress.Text = tbProgress.Value + "%";
         }
+
+        private void btnZrusit_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
+        }
+
     }
 }

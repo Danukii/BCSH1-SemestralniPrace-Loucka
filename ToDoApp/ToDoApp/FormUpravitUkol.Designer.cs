@@ -30,8 +30,6 @@
         {
             txtNazev = new TextBox();
             txtPopis = new TextBox();
-            btnOk = new Button();
-            btnZrusit = new Button();
             dtpDatum = new DateTimePicker();
             chbSplneno = new CheckBox();
             cmbUzivatel = new ComboBox();
@@ -53,6 +51,8 @@
             lblProgress = new Label();
             chbProgressBar = new CheckBox();
             chbProcenta = new CheckBox();
+            btnOk = new Button();
+            btnZrusit = new Button();
             ((System.ComponentModel.ISupportInitialize)tbProgress).BeginInit();
             SuspendLayout();
             // 
@@ -74,32 +74,6 @@
             txtPopis.Size = new Size(175, 80);
             txtPopis.TabIndex = 1;
             txtPopis.TextAlign = HorizontalAlignment.Right;
-            // 
-            // btnOk
-            // 
-            btnOk.BackColor = SystemColors.ControlLightLight;
-            btnOk.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            btnOk.ForeColor = Color.MediumSpringGreen;
-            btnOk.Location = new Point(455, 302);
-            btnOk.Name = "btnOk";
-            btnOk.Size = new Size(75, 33);
-            btnOk.TabIndex = 2;
-            btnOk.Text = "OK";
-            btnOk.UseVisualStyleBackColor = false;
-            btnOk.Click += btnOK_Click;
-            // 
-            // btnZrusit
-            // 
-            btnZrusit.BackColor = SystemColors.ControlLightLight;
-            btnZrusit.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            btnZrusit.ForeColor = Color.DeepPink;
-            btnZrusit.Location = new Point(558, 302);
-            btnZrusit.Name = "btnZrusit";
-            btnZrusit.Size = new Size(75, 33);
-            btnZrusit.TabIndex = 3;
-            btnZrusit.Text = "zrušit";
-            btnZrusit.UseVisualStyleBackColor = false;
-            btnZrusit.Click += btnCancel_Click;
             // 
             // dtpDatum
             // 
@@ -331,12 +305,46 @@
             chbProcenta.Text = "zobrazit procenta";
             chbProcenta.UseVisualStyleBackColor = true;
             // 
+            // btnOk
+            // 
+            btnOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnOk.BackColor = Color.MediumSpringGreen;
+            btnOk.FlatAppearance.BorderSize = 0;
+            btnOk.FlatStyle = FlatStyle.Flat;
+            btnOk.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            btnOk.ForeColor = Color.Black;
+            btnOk.Location = new Point(455, 297);
+            btnOk.Name = "btnOk";
+            btnOk.Size = new Size(70, 30);
+            btnOk.TabIndex = 25;
+            btnOk.Text = "OK";
+            btnOk.UseVisualStyleBackColor = false;
+            btnOk.Click += this.btnOk_Click;
+            // 
+            // btnZrusit
+            // 
+            btnZrusit.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnZrusit.BackColor = Color.Crimson;
+            btnZrusit.FlatAppearance.BorderSize = 0;
+            btnZrusit.FlatStyle = FlatStyle.Flat;
+            btnZrusit.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            btnZrusit.ForeColor = Color.WhiteSmoke;
+            btnZrusit.Location = new Point(560, 297);
+            btnZrusit.Name = "btnZrusit";
+            btnZrusit.Size = new Size(70, 30);
+            btnZrusit.TabIndex = 26;
+            btnZrusit.Text = "zrušit";
+            btnZrusit.UseVisualStyleBackColor = false;
+            btnZrusit.Click += btnZrusit_Click;
+            // 
             // FormUpravitUkol
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(35, 35, 55);
             ClientSize = new Size(657, 347);
+            Controls.Add(btnZrusit);
+            Controls.Add(btnOk);
             Controls.Add(chbProcenta);
             Controls.Add(chbProgressBar);
             Controls.Add(lblProgress);
@@ -358,8 +366,6 @@
             Controls.Add(cmbUzivatel);
             Controls.Add(chbSplneno);
             Controls.Add(dtpDatum);
-            Controls.Add(btnZrusit);
-            Controls.Add(btnOk);
             Controls.Add(txtPopis);
             Controls.Add(txtNazev);
             ForeColor = SystemColors.ControlLightLight;
@@ -376,8 +382,6 @@
 
         private TextBox txtNazev;
         private TextBox txtPopis;
-        private Button btnOk;
-        private Button btnZrusit;
         private DateTimePicker dtpDatum;
         private CheckBox chbSplneno;
         private ComboBox cmbUzivatel;
@@ -399,5 +403,7 @@
         private Label lblProgress;
         private CheckBox chbProgressBar;
         private CheckBox chbProcenta;
+        public Button btnOk;
+        public Button btnZrusit;
     }
 }

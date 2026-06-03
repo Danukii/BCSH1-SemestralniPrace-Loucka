@@ -73,6 +73,10 @@ namespace ToDoApp
             cmbFiltrStav.Items.AddRange(new[] { "vše", "splněno", "nesplněno" });
             cmbFiltrStav.SelectedIndex = 0;
 
+            toolTip1.SetToolTip(btnPridat, "Přidání nového úkolu");
+            toolTip2.SetToolTip(btnFiltrovat, "Filtrování úkolů");
+            toolTip3.SetToolTip(txtHledat, "Vyhledávání podle názvu");
+
             // obnovení filtrů (pro případ, že by se načetly nové položky)
             ObnovFiltry();
 
@@ -95,6 +99,7 @@ namespace ToDoApp
                 flpUkoly.Controls.Add(VytvorUkolPanel(ukol));
 
             flpUkoly.ResumeLayout();
+            AktualizujStatistiky();
         }
 
         // obnovení filtrů (po změně uživatelů/štítků) - znovu naplnit ComboBoxy pro filtrování
@@ -133,6 +138,18 @@ namespace ToDoApp
                 BackColor = Color.FromArgb(35, 35, 55),
                 Margin = new Padding(8),
                 Padding = new Padding(10)
+            };
+
+            // kliknutí na panel - otevřít detail úkolu
+            panel.Cursor = Cursors.Hand;
+            panel.Click += (s, e) =>
+            {
+                var detail = new FormDetailUkol(ukol, _data);
+
+                if (detail.ShowDialog() == DialogResult.OK) {
+                    ObnovUI();
+                    ObnovFiltry();
+                }
             };
 
             // checkbox (stav) - tlačítko dokončit/odznačit
@@ -342,19 +359,11 @@ namespace ToDoApp
             if (stitekId != null)
                 filtered = filtered.Where(u => u.StitekId.Contains(stitekId.Value));
 
-            if (stav == "splněno")
-            {
+            if (stav == "splněno") {
                 filtered = filtered.Where(u => u.JeSplneno);
             }
-            else if (stav == "nesplněno")
-            {
+            else if (stav == "nesplněno") {
                 filtered = filtered.Where(u => !u.JeSplneno);
-            }
-            else if (stav == "částečně hotové")
-            {
-                filtered = filtered.Where(u =>
-                    u.Progress > 0 &&
-                    u.Progress < 100);
             }
 
             ObnovUI(filtered.ToList());
@@ -426,6 +435,21 @@ namespace ToDoApp
         {
             txtHledat.Text = "";
             ObnovUI();
+        }
+
+        // aktualizace statistik
+        private void AktualizujStatistiky()
+        {
+            int celkem = _data.Ukoly.Count;
+
+            int splneno = _data.Ukoly.Count(u => u.JeSplneno);
+
+            double procenta = celkem == 0 ? 0 : (double)splneno / celkem * 100;
+
+            lblProcentoHotovo.Text = $"{procenta:F0} % úkolů dokončeno"; //XX % úkolů dokončeno
+            //lblPocetUkolu.Text = $"Úkolů: {celkem}";
+            //lblSplneno.Text = $"Splněno: {splneno}";
+            
         }
     }
 }

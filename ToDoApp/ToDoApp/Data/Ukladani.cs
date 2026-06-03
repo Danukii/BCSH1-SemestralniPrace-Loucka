@@ -10,13 +10,14 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace ToDoApp.Data
 {
-    internal class Ukladani
+    public class Ukladani
     {
         private const string FilePath = "data.json";
 
         public List<Ukol> Ukoly { get; set; } = new();
         public List<Uzivatel> Uzivatele { get; set; } = new();
         public List<Stitek> Stitky { get; set; } = new();
+        public bool PrvniSpusteni { get; set; } = true;
 
         public void Ulozit()
         {

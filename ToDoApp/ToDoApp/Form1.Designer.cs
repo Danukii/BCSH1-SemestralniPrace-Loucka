@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             topPanel = new Panel();
+            lblProcentoHotovo = new Label();
             lblHledat = new Label();
             btnZrusitHledani = new Button();
             txtHledat = new TextBox();
@@ -42,12 +44,16 @@
             cmbFiltrStav = new ComboBox();
             lblPopis = new Label();
             flpUkoly = new FlowLayoutPanel();
+            toolTip1 = new ToolTip(components);
+            toolTip2 = new ToolTip(components);
+            toolTip3 = new ToolTip(components);
             topPanel.SuspendLayout();
             SuspendLayout();
             // 
             // topPanel
             // 
             topPanel.BackColor = Color.Purple;
+            topPanel.Controls.Add(lblProcentoHotovo);
             topPanel.Controls.Add(lblHledat);
             topPanel.Controls.Add(btnZrusitHledani);
             topPanel.Controls.Add(txtHledat);
@@ -66,6 +72,19 @@
             topPanel.Size = new Size(900, 92);
             topPanel.TabIndex = 1;
             topPanel.Paint += topPanel_Paint;
+            // 
+            // lblProcentoHotovo
+            // 
+            lblProcentoHotovo.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lblProcentoHotovo.AutoSize = true;
+            lblProcentoHotovo.BackColor = Color.Transparent;
+            lblProcentoHotovo.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            lblProcentoHotovo.ForeColor = Color.FromArgb(20, 20, 35);
+            lblProcentoHotovo.Location = new Point(596, 56);
+            lblProcentoHotovo.Name = "lblProcentoHotovo";
+            lblProcentoHotovo.Size = new Size(139, 20);
+            lblProcentoHotovo.TabIndex = 11;
+            lblProcentoHotovo.Text = "lblProcentoHotovo";
             // 
             // lblHledat
             // 
@@ -228,6 +247,18 @@
             flpUkoly.TabIndex = 0;
             flpUkoly.WrapContents = false;
             // 
+            // toolTip1
+            // 
+            toolTip1.ToolTipIcon = ToolTipIcon.Info;
+            // 
+            // toolTip2
+            // 
+            toolTip2.ToolTipIcon = ToolTipIcon.Info;
+            // 
+            // toolTip3
+            // 
+            toolTip3.ToolTipIcon = ToolTipIcon.Info;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -261,5 +292,9 @@
         private Button btnZrusitHledani;
         private Label lblHledat;
         public Button btnFiltrovat;
+        private ToolTip toolTip1;
+        private ToolTip toolTip2;
+        private ToolTip toolTip3;
+        private Label lblProcentoHotovo;
     }
 }
