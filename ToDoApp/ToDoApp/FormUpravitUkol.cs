@@ -313,5 +313,9 @@ namespace ToDoApp
             Close();
         }
 
+        private void txtNovyStitek_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

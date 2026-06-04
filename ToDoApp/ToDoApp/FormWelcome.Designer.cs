@@ -79,7 +79,7 @@
             btnPokracovat.Cursor = Cursors.Hand;
             btnPokracovat.FlatAppearance.BorderSize = 0;
             btnPokracovat.FlatStyle = FlatStyle.Flat;
-            btnPokracovat.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            btnPokracovat.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnPokracovat.ForeColor = Color.White;
             btnPokracovat.Location = new Point(398, 491);
             btnPokracovat.Name = "btnPokracovat";

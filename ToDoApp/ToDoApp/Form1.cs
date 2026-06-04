@@ -18,6 +18,7 @@ namespace ToDoApp
     {
         private Ukladani _data;
         private VytvoreniUkolu _vytvoreniUkolu;
+        private ToolTip toolTip = new ToolTip();
 
         public Form1()
         {
@@ -54,7 +55,6 @@ namespace ToDoApp
             }
 
             cmbFiltrUzivatel.DisplayMember = "Jmeno";
-
             cmbFiltrUzivatel.SelectedIndex = 0;
 
             // filtr štítků
@@ -66,16 +66,11 @@ namespace ToDoApp
             }
 
             cmbFiltrStitek.DisplayMember = "Nazev";
-
             cmbFiltrStitek.SelectedIndex = 0;
 
             // naplnění stavu pro filtraci
             cmbFiltrStav.Items.AddRange(new[] { "vše", "splněno", "nesplněno" });
             cmbFiltrStav.SelectedIndex = 0;
-
-            toolTip1.SetToolTip(btnPridat, "Přidání nového úkolu");
-            toolTip2.SetToolTip(btnFiltrovat, "Filtrování úkolů");
-            toolTip3.SetToolTip(txtHledat, "Vyhledávání podle názvu");
 
             // obnovení filtrů (pro případ, že by se načetly nové položky)
             ObnovFiltry();
@@ -158,6 +153,8 @@ namespace ToDoApp
                 Checked = ukol.JeSplneno,
                 Location = new Point(10, 25)
             };
+
+            toolTip.SetToolTip(chkSplneno, "Označit jako splněné");
 
             chkSplneno.CheckedChanged += (s, e) =>
             {
@@ -247,6 +244,7 @@ namespace ToDoApp
                 Cursor = Cursors.Hand
             };
 
+            toolTip.SetToolTip(btnUpravit, "Upravit úkol");
             btnUpravit.FlatAppearance.BorderSize = 0;
             btnUpravit.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnUpravit.FlatAppearance.MouseOverBackColor = Color.Transparent;
@@ -276,6 +274,7 @@ namespace ToDoApp
                 Cursor = Cursors.Hand
             };
 
+            toolTip.SetToolTip(btnSmazat, "Smazat úkol");
             btnSmazat.FlatAppearance.BorderSize = 0;
             btnSmazat.FlatAppearance.MouseDownBackColor = Color.Transparent;
             btnSmazat.FlatAppearance.MouseOverBackColor = Color.Transparent;

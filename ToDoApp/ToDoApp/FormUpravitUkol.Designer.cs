@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             txtNazev = new TextBox();
             txtPopis = new TextBox();
             dtpDatum = new DateTimePicker();
@@ -53,6 +54,7 @@
             chbProcenta = new CheckBox();
             btnOk = new Button();
             btnZrusit = new Button();
+            toolTip2 = new ToolTip(components);
             ((System.ComponentModel.ISupportInitialize)tbProgress).BeginInit();
             SuspendLayout();
             // 
@@ -77,7 +79,7 @@
             // 
             // dtpDatum
             // 
-            dtpDatum.Location = new Point(20, 206);
+            dtpDatum.Location = new Point(20, 243);
             dtpDatum.Name = "dtpDatum";
             dtpDatum.Size = new Size(178, 23);
             dtpDatum.TabIndex = 4;
@@ -86,7 +88,7 @@
             // chbSplneno
             // 
             chbSplneno.AutoSize = true;
-            chbSplneno.Location = new Point(455, 248);
+            chbSplneno.Location = new Point(250, 347);
             chbSplneno.Name = "chbSplneno";
             chbSplneno.Size = new Size(68, 19);
             chbSplneno.TabIndex = 5;
@@ -98,7 +100,7 @@
             cmbUzivatel.BackColor = Color.FromArgb(45, 45, 65);
             cmbUzivatel.ForeColor = Color.White;
             cmbUzivatel.FormattingEnabled = true;
-            cmbUzivatel.Location = new Point(20, 272);
+            cmbUzivatel.Location = new Point(20, 307);
             cmbUzivatel.Name = "cmbUzivatel";
             cmbUzivatel.Size = new Size(178, 23);
             cmbUzivatel.TabIndex = 6;
@@ -108,7 +110,7 @@
             chlbStitky.BackColor = Color.FromArgb(45, 45, 65);
             chlbStitky.ForeColor = Color.White;
             chlbStitky.FormattingEnabled = true;
-            chlbStitky.Location = new Point(239, 41);
+            chlbStitky.Location = new Point(239, 71);
             chlbStitky.Name = "chlbStitky";
             chlbStitky.Size = new Size(175, 130);
             chlbStitky.TabIndex = 7;
@@ -140,7 +142,7 @@
             lblUzivatele.AutoSize = true;
             lblUzivatele.BackColor = Color.Transparent;
             lblUzivatele.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            lblUzivatele.Location = new Point(138, 250);
+            lblUzivatele.Location = new Point(138, 285);
             lblUzivatele.Name = "lblUzivatele";
             lblUzivatele.Size = new Size(60, 17);
             lblUzivatele.TabIndex = 10;
@@ -151,7 +153,7 @@
             lblDatumSplneni.AutoSize = true;
             lblDatumSplneni.BackColor = Color.Transparent;
             lblDatumSplneni.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            lblDatumSplneni.Location = new Point(97, 186);
+            lblDatumSplneni.Location = new Point(97, 223);
             lblDatumSplneni.Name = "lblDatumSplneni";
             lblDatumSplneni.Size = new Size(101, 17);
             lblDatumSplneni.TabIndex = 11;
@@ -162,7 +164,7 @@
             lblStitky.AutoSize = true;
             lblStitky.BackColor = Color.Transparent;
             lblStitky.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            lblStitky.Location = new Point(239, 21);
+            lblStitky.Location = new Point(239, 51);
             lblStitky.Name = "lblStitky";
             lblStitky.Size = new Size(86, 17);
             lblStitky.TabIndex = 12;
@@ -172,11 +174,12 @@
             // 
             txtNovyStitek.BackColor = Color.FromArgb(45, 45, 65);
             txtNovyStitek.ForeColor = Color.White;
-            txtNovyStitek.Location = new Point(455, 148);
+            txtNovyStitek.Location = new Point(458, 178);
             txtNovyStitek.Name = "txtNovyStitek";
             txtNovyStitek.Size = new Size(175, 23);
             txtNovyStitek.TabIndex = 13;
             txtNovyStitek.TextAlign = HorizontalAlignment.Right;
+            txtNovyStitek.TextChanged += txtNovyStitek_TextChanged;
             // 
             // btnPridatStitek
             // 
@@ -184,11 +187,12 @@
             btnPridatStitek.FlatStyle = FlatStyle.System;
             btnPridatStitek.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
             btnPridatStitek.ForeColor = SystemColors.WindowText;
-            btnPridatStitek.Location = new Point(598, 178);
+            btnPridatStitek.Location = new Point(601, 208);
             btnPridatStitek.Name = "btnPridatStitek";
             btnPridatStitek.Size = new Size(32, 32);
             btnPridatStitek.TabIndex = 14;
             btnPridatStitek.Text = "+";
+            toolTip2.SetToolTip(btnPridatStitek, "Vytvořit nový štítek");
             btnPridatStitek.UseVisualStyleBackColor = true;
             btnPridatStitek.Click += btnPridatStitek_Click;
             // 
@@ -197,7 +201,7 @@
             txtNovyUzivatel.BackColor = Color.FromArgb(45, 45, 65);
             txtNovyUzivatel.ForeColor = Color.White;
             txtNovyUzivatel.ImeMode = ImeMode.NoControl;
-            txtNovyUzivatel.Location = new Point(455, 41);
+            txtNovyUzivatel.Location = new Point(455, 71);
             txtNovyUzivatel.Name = "txtNovyUzivatel";
             txtNovyUzivatel.Size = new Size(178, 23);
             txtNovyUzivatel.TabIndex = 15;
@@ -209,11 +213,12 @@
             btnPridatUzivatele.FlatStyle = FlatStyle.System;
             btnPridatUzivatele.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             btnPridatUzivatele.ForeColor = SystemColors.WindowText;
-            btnPridatUzivatele.Location = new Point(599, 71);
+            btnPridatUzivatele.Location = new Point(599, 101);
             btnPridatUzivatele.Name = "btnPridatUzivatele";
             btnPridatUzivatele.Size = new Size(32, 32);
             btnPridatUzivatele.TabIndex = 16;
             btnPridatUzivatele.Text = "+";
+            toolTip2.SetToolTip(btnPridatUzivatele, "Vytvořit nového uživatele");
             btnPridatUzivatele.UseVisualStyleBackColor = false;
             btnPridatUzivatele.Click += btnPridatUzivatele_Click_1;
             // 
@@ -222,7 +227,7 @@
             lblNovyUzivatel.AutoSize = true;
             lblNovyUzivatel.BackColor = Color.Transparent;
             lblNovyUzivatel.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            lblNovyUzivatel.Location = new Point(539, 21);
+            lblNovyUzivatel.Location = new Point(539, 51);
             lblNovyUzivatel.Name = "lblNovyUzivatel";
             lblNovyUzivatel.Size = new Size(94, 17);
             lblNovyUzivatel.TabIndex = 17;
@@ -233,7 +238,7 @@
             lblNovyStitek.AutoSize = true;
             lblNovyStitek.BackColor = Color.Transparent;
             lblNovyStitek.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            lblNovyStitek.Location = new Point(552, 128);
+            lblNovyStitek.Location = new Point(552, 158);
             lblNovyStitek.Name = "lblNovyStitek";
             lblNovyStitek.Size = new Size(81, 17);
             lblNovyStitek.TabIndex = 18;
@@ -243,11 +248,12 @@
             // 
             btnSmazatUzivatele.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
             btnSmazatUzivatele.ForeColor = SystemColors.ControlText;
-            btnSmazatUzivatele.Location = new Point(561, 71);
+            btnSmazatUzivatele.Location = new Point(561, 101);
             btnSmazatUzivatele.Name = "btnSmazatUzivatele";
             btnSmazatUzivatele.Size = new Size(32, 32);
             btnSmazatUzivatele.TabIndex = 19;
             btnSmazatUzivatele.Text = "-";
+            toolTip2.SetToolTip(btnSmazatUzivatele, "Smazat vybraného uživatele");
             btnSmazatUzivatele.UseVisualStyleBackColor = true;
             btnSmazatUzivatele.Click += btnSmazatUzivatele_Click;
             // 
@@ -255,11 +261,12 @@
             // 
             btnSmazatStitek.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
             btnSmazatStitek.ForeColor = SystemColors.ControlText;
-            btnSmazatStitek.Location = new Point(560, 178);
+            btnSmazatStitek.Location = new Point(563, 208);
             btnSmazatStitek.Name = "btnSmazatStitek";
             btnSmazatStitek.Size = new Size(32, 32);
             btnSmazatStitek.TabIndex = 20;
             btnSmazatStitek.Text = "- štítek";
+            toolTip2.SetToolTip(btnSmazatStitek, "Smazat vybraný štítek");
             btnSmazatStitek.UseVisualStyleBackColor = true;
             btnSmazatStitek.Click += btnSmazatStitek_Click;
             // 
@@ -267,7 +274,7 @@
             // 
             tbProgress.Cursor = Cursors.Hand;
             tbProgress.LargeChange = 1;
-            tbProgress.Location = new Point(236, 222);
+            tbProgress.Location = new Point(236, 243);
             tbProgress.Maximum = 100;
             tbProgress.Name = "tbProgress";
             tbProgress.Size = new Size(178, 45);
@@ -279,7 +286,7 @@
             // 
             lblProgress.AutoSize = true;
             lblProgress.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            lblProgress.Location = new Point(239, 194);
+            lblProgress.Location = new Point(239, 215);
             lblProgress.Name = "lblProgress";
             lblProgress.Size = new Size(44, 25);
             lblProgress.TabIndex = 22;
@@ -288,7 +295,7 @@
             // chbProgressBar
             // 
             chbProgressBar.AutoSize = true;
-            chbProgressBar.Location = new Point(248, 272);
+            chbProgressBar.Location = new Point(250, 286);
             chbProgressBar.Name = "chbProgressBar";
             chbProgressBar.Size = new Size(135, 19);
             chbProgressBar.TabIndex = 23;
@@ -298,7 +305,7 @@
             // chbProcenta
             // 
             chbProcenta.AutoSize = true;
-            chbProcenta.Location = new Point(248, 297);
+            chbProcenta.Location = new Point(250, 311);
             chbProcenta.Name = "chbProcenta";
             chbProcenta.Size = new Size(117, 19);
             chbProcenta.TabIndex = 24;
@@ -313,13 +320,13 @@
             btnOk.FlatStyle = FlatStyle.Flat;
             btnOk.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
             btnOk.ForeColor = Color.Black;
-            btnOk.Location = new Point(455, 297);
+            btnOk.Location = new Point(474, 347);
             btnOk.Name = "btnOk";
             btnOk.Size = new Size(70, 30);
             btnOk.TabIndex = 25;
             btnOk.Text = "OK";
             btnOk.UseVisualStyleBackColor = false;
-            btnOk.Click += this.btnOk_Click;
+            btnOk.Click += btnOk_Click;
             // 
             // btnZrusit
             // 
@@ -329,7 +336,7 @@
             btnZrusit.FlatStyle = FlatStyle.Flat;
             btnZrusit.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 238);
             btnZrusit.ForeColor = Color.WhiteSmoke;
-            btnZrusit.Location = new Point(560, 297);
+            btnZrusit.Location = new Point(560, 347);
             btnZrusit.Name = "btnZrusit";
             btnZrusit.Size = new Size(70, 30);
             btnZrusit.TabIndex = 26;
@@ -342,7 +349,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(35, 35, 55);
-            ClientSize = new Size(657, 347);
+            ClientSize = new Size(657, 397);
             Controls.Add(btnZrusit);
             Controls.Add(btnOk);
             Controls.Add(chbProcenta);
@@ -405,5 +412,6 @@
         private CheckBox chbProcenta;
         public Button btnOk;
         public Button btnZrusit;
+        private ToolTip toolTip2;
     }
 }

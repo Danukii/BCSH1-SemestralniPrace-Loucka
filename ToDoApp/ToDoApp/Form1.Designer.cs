@@ -45,8 +45,6 @@
             lblPopis = new Label();
             flpUkoly = new FlowLayoutPanel();
             toolTip1 = new ToolTip(components);
-            toolTip2 = new ToolTip(components);
-            toolTip3 = new ToolTip(components);
             topPanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -120,6 +118,7 @@
             txtHledat.PlaceholderText = "hledat úkol...";
             txtHledat.Size = new Size(120, 23);
             txtHledat.TabIndex = 1;
+            toolTip1.SetToolTip(txtHledat, "Vyhledávání podle názvu");
             txtHledat.TextChanged += txtHledat_TextChanged;
             // 
             // btnVymazatFiltry
@@ -135,6 +134,7 @@
             btnVymazatFiltry.Size = new Size(30, 30);
             btnVymazatFiltry.TabIndex = 6;
             btnVymazatFiltry.Text = "↻";
+            toolTip1.SetToolTip(btnVymazatFiltry, "Zobrazit všechny úkoly");
             btnVymazatFiltry.UseVisualStyleBackColor = false;
             btnVymazatFiltry.Click += btnVymazatFiltry_Click;
             // 
@@ -151,6 +151,7 @@
             btnFiltrovat.Size = new Size(100, 30);
             btnFiltrovat.TabIndex = 7;
             btnFiltrovat.Text = "Filtrovat";
+            toolTip1.SetToolTip(btnFiltrovat, "Použije vybrané filtry");
             btnFiltrovat.UseVisualStyleBackColor = false;
             btnFiltrovat.Click += btnFiltrovat_Click;
             // 
@@ -167,6 +168,7 @@
             btnPridat.Size = new Size(100, 30);
             btnPridat.TabIndex = 0;
             btnPridat.Text = "Přidat úkol";
+            toolTip1.SetToolTip(btnPridat, "Přidá nový úkol");
             btnPridat.UseVisualStyleBackColor = false;
             btnPridat.Click += btnPridat_Click;
             // 
@@ -179,6 +181,7 @@
             cmbFiltrStitek.Size = new Size(140, 23);
             cmbFiltrStitek.TabIndex = 5;
             cmbFiltrStitek.Text = "Štítky";
+            toolTip1.SetToolTip(cmbFiltrStitek, "Filtrování podle štítku");
             // 
             // lblStatus
             // 
@@ -200,6 +203,7 @@
             cmbFiltrUzivatel.Size = new Size(140, 23);
             cmbFiltrUzivatel.TabIndex = 4;
             cmbFiltrUzivatel.Text = "Uživatel";
+            toolTip1.SetToolTip(cmbFiltrUzivatel, "Filtrování podle uživatele");
             // 
             // lblDatum
             // 
@@ -221,6 +225,7 @@
             cmbFiltrStav.Size = new Size(140, 23);
             cmbFiltrStav.TabIndex = 3;
             cmbFiltrStav.Text = "Stav";
+            toolTip1.SetToolTip(cmbFiltrStav, "Filtrování podle stavu úkolu");
             // 
             // lblPopis
             // 
@@ -250,14 +255,6 @@
             // toolTip1
             // 
             toolTip1.ToolTipIcon = ToolTipIcon.Info;
-            // 
-            // toolTip2
-            // 
-            toolTip2.ToolTipIcon = ToolTipIcon.Info;
-            // 
-            // toolTip3
-            // 
-            toolTip3.ToolTipIcon = ToolTipIcon.Info;
             // 
             // Form1
             // 
@@ -293,8 +290,6 @@
         private Label lblHledat;
         public Button btnFiltrovat;
         private ToolTip toolTip1;
-        private ToolTip toolTip2;
-        private ToolTip toolTip3;
         private Label lblProcentoHotovo;
     }
 }
