@@ -31,7 +31,9 @@ namespace ToDoApp
             _data.Uzivatele ??= new List<Uzivatel>();
             _data.Stitky ??= new List<Stitek>();
 
+            
             // testovací data (jen když je prázdno)
+            /*
             if (!_data.Uzivatele.Any())
             {
                 _data.Uzivatele.Add(new Uzivatel { Id = 1, Jmeno = "Já" });
@@ -42,6 +44,7 @@ namespace ToDoApp
                 _data.Stitky.Add(new Stitek { Id = 1, Nazev = "Škola" });
                 _data.Stitky.Add(new Stitek { Id = 2, Nazev = "Práce" });
             }
+            */
 
             _vytvoreniUkolu = new VytvoreniUkolu(_data);
 
